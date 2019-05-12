@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Smart Home</title>
+    <link rel="shortcut icon" href="https://material.io/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <% htmlWebpackPlugin.files.css.forEach(function (f) { %><link rel="stylesheet" href="<%=f %>">
+    <% }) %>
+  </head>
+  <body>
+      <div id="main">
+        <app-login></app-login>
+      </div>
+      <app-notification></app-notification>
+      <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.vendors.entry %>"></script>
+      <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.runtime.entry %>"></script>      
+      <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.app.entry %>"></script>
+  </body>
+</html>

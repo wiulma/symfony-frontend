@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <!-- Bootstrap NavBar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30"
+                class="d-inline-block align-top" alt="">
+            <span class="menu-collapsed">Smart Home</span>
+        </a>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+            <div class="navbar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a id="link-home" class="nav-link home" href="#private/dashboard" data-navigo>Home</a>
+                    </li>
+                </ul>
+                <app-profile-menu></app-profile-menu>
+            </div>
+            <div class="navbar-nav">
+                <ul>
+                    <div class="nav-item dropdown">
+                        <a href="#" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#" id="menuChangePwd">Change Password</a>
+                            <a class="dropdown-item" href="#" id="menuLogout">Logout</a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav><!-- NavBar END -->
+
+    <!-- MAIN -->
+    <div class="col" id="main-content">
+        <app-dashboard></app-dashboard>
+    </div>
+
+</div>
