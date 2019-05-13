@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Entity\Credential;
+use App\Security\JWTToken;
 
 /**
  * @Route("/login")
@@ -40,12 +41,11 @@ class LoginController extends AbstractController
 
         if (isset($auth )) {
             $em = $doctrine->getManager();
-            // https://github.com/firebase/php-jwt
-            $auth->setToken("aaa");
+            $auth->setToken(JWTToken::encode($auth));
             $em->persist($auth);
             $em->flush();
 
-            $respData = ["token" => $auth->getToken()];
+            $respData = ["token" => $auth->getToken(), "role" => $auth->getRole()];
             $respStatus = Response::HTTP_OK;
 
         } else {
