@@ -35,6 +35,18 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/{idUser}", name="api_get_user",  methods={"GET"})
+     * @param String $idUser
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
+     */
+
+    public function getDetail($idUser)
+    {
+        $data = $this->getDoctrine()->getRepository(User::class)->findOneBy(["id" => $idUser]);
+        return new JsonResponse(["data" => array_map(array($this, "serialize"), $data)], Response::HTTP_OK);
+    }
+
+    /**
      * @Route("", name="api_post_users",  methods={"POST"})
      * @param Request $request
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
@@ -79,6 +91,7 @@ class UserController extends AbstractController
         }
         return new JsonResponse($respData, $respStatus);
     }
+
 
     private function serialize(User $user)
     {

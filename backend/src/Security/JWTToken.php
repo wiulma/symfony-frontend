@@ -6,8 +6,8 @@
 
 namespace App\Security;
 
-use App\Entity\Credential;
 use \Firebase\JWT\JWT;
+use App\Entity\Credential;
 
 class JWTToken
 {

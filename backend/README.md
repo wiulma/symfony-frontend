@@ -45,7 +45,7 @@ compose install
 
 2. log in docker php-fpm and execute
 ```
-bin/console doctrine:schema:update --force
+php bin/console doctrine:schema:update --force
 
 ```
 
