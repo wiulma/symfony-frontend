@@ -4,18 +4,19 @@ namespace App\Controller\Api;
 
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Entity\Credential;
 use App\Security\JWTToken;
+use App\RequestEntity\LoginRequest;
+use App\Form\LoginType;
 
 /**
  * @Route("/login")
  */
-class LoginController extends AbstractController
+class LoginController extends AbstractRestController
 {
 
     /**
@@ -28,30 +29,45 @@ class LoginController extends AbstractController
         $respStatus = Response::HTTP_INTERNAL_SERVER_ERROR;
         $respData = [];
 
-        $data = json_decode(
-            $request->getContent(),
-            true
-        );
+        $login = new LoginRequest();
+        $form = $this->createForm(LoginType::class, $login);
+        $data = json_decode($request->getContent(), true);
+        $form->submit($data);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        $doctrine = $this->getDoctrine();
+            //TODO filter_var
+            // form validation
+            // https://www.adcisolutions.com/knowledge/getting-started-rest-api-symfony-4
 
-        $auth = $doctrine
-            ->getRepository(Credential::class)
-            ->findOneBy(["username" => $data["username"], "password" => $data["password"]]);
+            // validate data with
+            // https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html
 
-        if (isset($auth )) {
-            $em = $doctrine->getManager();
-            $auth->setToken(JWTToken::encode($auth));
-            $em->persist($auth);
-            $em->flush();
+            $doctrine = $this->getDoctrine();
 
-            $respData = ["token" => $auth->getToken(), "role" => $auth->getRole()];
-            $respStatus = Response::HTTP_OK;
+            $auth = $doctrine
+                ->getRepository(Credential::class)
+                ->findOneBy($form->getData());
+
+            if (isset($auth )) {
+                $em = $doctrine->getManager();
+                $auth->setToken(JWTToken::encode($auth));
+                $em->persist($auth);
+                $em->flush();
+
+                $respData = ["token" => $auth->getToken(), "role" => $auth->getRole()];
+                $respStatus = Response::HTTP_OK;
+
+            } else {
+                $respStatus = Response::HTTP_UNAUTHORIZED;
+            }
+            return new JsonResponse($respData, $respStatus);
 
         } else {
-            $respStatus = Response::HTTP_UNAUTHORIZED;
+            $errors = $this->getErrorsFromForm($form);
+            $respData = ["errors" => $errors];
+            return new JsonResponse($respData, Response::HTTP_BAD_REQUEST);
         }
-        return new JsonResponse($respData, $respStatus);
+
     }
 
 }
