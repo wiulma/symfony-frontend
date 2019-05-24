@@ -1,7 +1,7 @@
 import domUtils from './../../../../utils/Dom';
 import template from './home.html';
 import routingService from '../../../../services/RoutingService'
-import userService from '../../services/UserService'
+import userService from '../../services/UserAuthService'
 
 import './home.scss';
 

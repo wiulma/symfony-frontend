@@ -1,12 +1,12 @@
 import viewService from './../../services/ViewService'
 import routingService from './../../services/RoutingService'
 import privateRoutingService from '../common/services/PrivateRoutingService'
-import userService from '../common/services/UserService'
+import userAuthService from '../common/services/UserAuthService'
 
 export default {
 
   init() {
-    return userService.checkAuth()
+    return userAuthService.checkAuth()
       .then(() => {
         this.initContent();
         this.initRoutes();
@@ -29,9 +29,9 @@ export default {
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })
-      .on('private/sensors', () => {
-        import ('../common/components/sensors/Sensors');
-        document.getElementById(viewService.CONTENT_AREA).innerHTML = "<app-sensors></app-sensors>";
+      .on('private/documents', () => {
+        import ('../common/components/documents/Documents');
+        document.getElementById(viewService.CONTENT_AREA).innerHTML = "<app-documents></app-documents>";
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })

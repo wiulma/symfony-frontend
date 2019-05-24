@@ -12,6 +12,10 @@ export default {
       component: "home-admin",
       module: "private-admin"
     },
+    "M": {
+      component: "home-manager",
+      module: "private-manager"
+    },
     "U": {
       component: "home-user",
       module: "private-user"

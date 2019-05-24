@@ -1,7 +1,7 @@
 import viewService from './../../services/ViewService'
 import routingService from './../../services/RoutingService'
 import privateRoutingService from '../common/services/PrivateRoutingService'
-import userService from '../common/services/UserService'
+import userService from '../common/services/UserAuthService'
 
 export default {
 
@@ -29,9 +29,9 @@ export default {
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })
-      .on('private/sensors', () => {
-        import ('../common/components/sensors/Sensors');
-        document.getElementById(viewService.CONTENT_AREA).innerHTML = "<app-sensors></app-sensors>";
+      .on('private/documents', () => {
+        import ('../common/components/documents/Documents');
+        document.getElementById(viewService.CONTENT_AREA).innerHTML = "<app-documents></app-documents>";
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })
@@ -41,7 +41,12 @@ export default {
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })
-
+      .on('private/doctypes', () => {
+        import ('./components/docTypes/DocTypes');
+        document.getElementById(viewService.CONTENT_AREA).innerHTML = "<app-doc-types></app-doc-types>";
+      }, {
+        before: privateRoutingService.authGuard.bind(privateRoutingService)
+      })
   }
 
 }

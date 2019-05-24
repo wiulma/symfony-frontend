@@ -54,10 +54,12 @@ export default {
       .notFound(() => {
         this.router.navigate('');
       });
-
+    // temp hack
+    storageService.remove(Const.USER_PROFILE_KEY);
     return this.checkLoggedProfile()
       .then (this.navigateNestedRoutes.bind(this))
-      .then (r => this.router.resolve());
+      .then (r => this.router.resolve())
+      .catch(() => this.router.navigate(''));
 
   },
 

@@ -1,10 +1,14 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack');
+const glob = require('glob');
+const CopyPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
   entry: {
-    app: './src/app.js'
+    app: './src/app.js',
+    lib: glob.sync(path.resolve(__dirname, './lib/*.js'))
   },
   output: {
     filename: '[name].js',
@@ -42,10 +46,6 @@ module.exports = {
           exclude: /(node_modules|vendors|lib)/,
           use: {
             loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-              plugins: ["@babel/plugin-syntax-dynamic-import"]
-            }
           }
         },
         {
@@ -84,7 +84,13 @@ module.exports = {
     ]  
   },
   plugins: [    
-    /*
+    new CopyPlugin([
+      {
+        from: 'src/assets',
+        to: 'assets',
+        ignore: ['*.js'],
+      }
+    ]),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -94,8 +100,7 @@ module.exports = {
       _: 'underscore',
       Promise: 'es6-promise',
     }),
-    */
 
-    new CleanWebpackPlugin({ verbose: true })
+    new CleanWebpackPlugin(['dist'], { verbose: true })
   ]  
 }

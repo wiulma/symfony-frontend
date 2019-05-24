@@ -1,6 +1,9 @@
 import domUtils from '../../../../utils/Dom'
+import i18nService from './../../../../services/I18nService';
 
-import template from './users.html'
+import tmplMain from './main.html'
+import tmplList from './list.html'
+import tmplItem from './item.html'
 
 customElements.define('app-users', class extends HTMLElement {
 
@@ -9,7 +12,9 @@ customElements.define('app-users', class extends HTMLElement {
   }
 
   connectedCallback() {
-    const n = domUtils.htmlToElement(template);
+    const n = domUtils.htmlToElement(tmplMain);
+    i18nService.localize(n);
+    this.className = "container";
     this.appendChild(n);
   }
 

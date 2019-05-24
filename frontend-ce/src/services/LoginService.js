@@ -1,6 +1,5 @@
 import serviceUtils from './../utils/Service';
 import storageService from './StorageService';
-import apiService from './ApiStubService';
 import Const from '../const'
 
 /**
@@ -16,7 +15,7 @@ export default {
    * @return Promise return profile data or error from backend
    */
   doLogin(formData) {
-    /*
+    
     return fetch(
         `${API_URL}/api/login`,
         {
@@ -29,8 +28,6 @@ export default {
         }
       )
       .then(response => Promise.all([response, response.json()]))
-      */
-     return apiService.login(serviceUtils.formDataToJson(formData))
         .then(([response, json]) => {
           if (response.ok) {
             storageService.save(Const.USER_PROFILE_KEY, json);

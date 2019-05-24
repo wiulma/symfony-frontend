@@ -9,7 +9,7 @@
         <a class="navbar-brand" href="#">
             <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30"
                 class="d-inline-block align-top" alt="">
-            <span class="menu-collapsed">Smart Home</span>
+            <span class="menu-collapsed">Comm-x</span>
         </a>
         <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
             <div class="navbar-nav">
@@ -22,16 +22,14 @@
             </div>
             <div class="navbar-nav">
                 <ul>
-                    <div class="nav-item dropdown">
-                        <a href="#" id="dropdownMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Profile
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#" id="menuChangePwd">Change Password</a>
-                            <a class="dropdown-item" href="#" id="menuLogout">Logout</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" data-i18n="Profile"></a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#" id="menuChangePwd" data-i18n="ChangePassword"></a>
+                                <a class="dropdown-item" href="#" id="menuLogout" data-i18n="Logout"></a>
                         </div>
-                    </div>
+                    </li>
                 </ul>
             </div>
         </div>

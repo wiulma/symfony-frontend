@@ -1,4 +1,4 @@
-import userService from './UserService'
+import userService from './UserAuthService'
 import routingService from '../../../services/RoutingService'
 
 export default {
