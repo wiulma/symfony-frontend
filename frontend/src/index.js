@@ -4,7 +4,7 @@ import $ from "jquery";
 
 import 'bootstrap-material-design';
 
-import CONST from './config';
+
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -28,7 +28,6 @@ ReactDOM.render(<App />, document.getElementById('root'),
     }
 );
 
-console.log(CONST.API_URL);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
