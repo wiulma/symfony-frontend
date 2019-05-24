@@ -5,13 +5,12 @@ namespace App\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
-use App\Entity\User;
+use App\Entity\Credential;
 use App\Security\JWTToken;
 
 class JwtAuthenticator extends AbstractGuardAuthenticator
@@ -55,10 +54,12 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
             return null;
         }
 
-        $username = $data['userId'];
+        $data = json_decode(json_encode($data), true);
 
-        $user = $this->em->getRepository(User::class)
-            ->findOneBy(['username' => $username]);
+        $userId = $data['data'] ? $data['data']['userId'] : null;
+
+        $user = $this->em->getRepository(Credential::class)
+            ->findOneBy(['userId' => $userId]);
 
         if (!$user){
             return null;

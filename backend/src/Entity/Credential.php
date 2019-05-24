@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="credentials")
  */
-class Credential {
+class Credential implements UserInterface {
 
     /**
      * @ORM\Id
@@ -99,6 +100,21 @@ class Credential {
 
     public function setUser($user) {
         $this->user = $user;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        $this->setToken(null);
     }
 
 }

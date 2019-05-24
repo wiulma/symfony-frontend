@@ -3,23 +3,18 @@
 namespace App\Controller\Api;
 
 use Symfony\Component\Routing\Annotation\Route;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 use App\Entity\User;
+use App\ResponseMapper\UserResponseMapper;
 
 /**
  * @Route("/users")
  */
-class UserController extends AbstractController
+class UserController extends AbstractRestController
 {
 
     /**
@@ -29,9 +24,8 @@ class UserController extends AbstractController
      */
     public function getList(Request $request)
     {
-
         $data = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return new JsonResponse(["data" => array_map(array($this, "serialize"), $data)], Response::HTTP_OK);
+        return new JsonResponse(["data" => $this->serializeList($data, new UserResponseMapper())], Response::HTTP_OK);
     }
 
     /**
@@ -43,7 +37,7 @@ class UserController extends AbstractController
     public function getDetail($idUser)
     {
         $data = $this->getDoctrine()->getRepository(User::class)->findOneBy(["id" => $idUser]);
-        return new JsonResponse(["data" => array_map(array($this, "serialize"), $data)], Response::HTTP_OK);
+        return new JsonResponse(["data" => $this->serialize($data)], Response::HTTP_OK);
     }
 
     /**
@@ -92,13 +86,4 @@ class UserController extends AbstractController
         return new JsonResponse($respData, $respStatus);
     }
 
-
-    private function serialize(User $user)
-    {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
-        $json = $serializer->serialize($user, 'json');
-        return $json;
-    }
 }

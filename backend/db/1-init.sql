@@ -1,8 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `sf4_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `sf4_db`;
+CREATE USER 'ngcommx_user'@'localhost' IDENTIFIED BY 'ngcommx_pw';
+
+CREATE DATABASE  IF NOT EXISTS `ngcommx` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `ngcommx`;
 -- MySQL dump 10.13  Distrib 8.0.16, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: sf4_db
+-- Host: 127.0.0.1    Database: ngcommx
 -- ------------------------------------------------------
 -- Server version	5.6.44
 
@@ -27,3 +29,5 @@ USE `sf4_db`;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-05-03 15:45:57
+
+GRANT ALL PRIVILEGES ON ngcommx. * TO 'ngcommx_user'@'localhost';

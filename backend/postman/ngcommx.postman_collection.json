@@ -55,7 +55,7 @@
 			"response": []
 		},
 		{
-			"name": "create user",
+			"name": "login",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -68,7 +68,51 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"giorgio\",\n\t\"surname\": \"zett\",\n\t\"gender\": \"\",\n\t\"email\": \"giorgio@example.com\"\n}"
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTg0NTg4NTEsImp0aSI6InFJdXJTXC9ob1lcL3E1bWRFTmcxa081QU5ZNEdMMXU0Z0tOakVDWW5KWjcwND0iLCJpc3MiOiJsb2NhbGhvc3Q6ODAwMCIsIm5iZiI6MTU1ODQ1ODg1MSwiZXhwIjoxNTU4NDYyNDUxLCJkYXRhIjp7InVzZXJJZCI6MX19.qGzdRI_psVaU6fTXcWE3ZY6E4u480INL3eLV0GXhFxw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
 				},
 				"url": {
 					"raw": "http://localhost:8000/api/users",

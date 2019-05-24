@@ -5,6 +5,9 @@ namespace App\Controller\Api;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class AbstractRestController extends AbstractController
 {
@@ -33,6 +36,39 @@ class AbstractRestController extends AbstractController
         }
     
         return $errors;
+    }
+
+    protected function filterData($data, $customFilters = [])
+    {
+        foreach($data as $key=>$value) {
+            $data[$key] = $value ? filter_var($value, $customFilters[$key] ?? FILTER_SANITIZE_STRING) : $value;
+        }
+    }
+
+
+    public function serialize($obj)
+    {
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        return $serializer->serialize($obj, 'json');
+    }
+
+    public function serializeList($list, $mapper = NULL)
+    {
+        $result = [];
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        foreach ($list as $item) {
+            $result[] = $mapper ? $mapper->serializeListItem ($item) : $serializer->serialize($item, 'json');
+        }
+
+        return $result;
     }
 
 }

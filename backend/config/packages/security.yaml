@@ -10,15 +10,21 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/(?!api)
             anonymous: true
 
+        #login:
+        #    pattern: ^/api/login
+        #    stateless: true
+        #    anonymous: true
+
         api:
-            pattern: ^/api
+            pattern: ^/api/(?!login)
             stateless: true
             guard:
                 authenticators:
-                    - App\Security\JwtAuthenticator
-            provider: user_db_provider
+                    - 'jwt_authenticator'
+            # provider: user_db_provider
 
             # activate different ways to authenticate
 
@@ -33,5 +39,5 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: [ROLE_USER] }
