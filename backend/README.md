@@ -51,16 +51,16 @@ compose install
 1. Only if working with local database
     1. create user
     ```
-        user:ngcommx_user
-        pwd:ngcommx_pw
+        user:sample_user
+        pwd:sample_pw
     ```
 
-    2. create database ngcommx
+    2. create database sample
     3. execute scripts
         - db/1-init.sql
         - db/2-data.sql
 
-    4. grant user ngcommx_user to manage ngcommx
+    4. grant user sample_user to manage sample
 
 2. log in docker php-fpm and execute
 ```

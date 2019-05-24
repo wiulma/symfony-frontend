@@ -10,13 +10,13 @@ services:
       # - ./db:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=docker_root
-      - MYSQL_DATABASE=ngcommx
-      - MYSQL_USER=ngcommx_user
-      - MYSQL_PASSWORD=ngcommx_pw
+      - MYSQL_DATABASE=sample
+      - MYSQL_USER=sample_user
+      - MYSQL_PASSWORD=sample_pw
     ports:
       - "8306:3306"
     networks:
-      - ngcommx-net
+      - sample-net
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -31,7 +31,7 @@ services:
       # for mysql container
       - "mysql:mysql"
     networks:
-      - ngcommx-net
+      - sample-net
 
   webserver:
     image: nginx:alpine
@@ -45,7 +45,7 @@ services:
     depends_on:
       - php-fpm
     networks:
-      - ngcommx-net
+      - sample-net
 
   php-fpm:
     build: docker/php-fpm/
@@ -57,10 +57,10 @@ services:
       - .:/application
       - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
     networks:
-      - ngcommx-net
+      - sample-net
 
 volumes:
   db-data:
 
 networks:
-  ngcommx-net:
+  sample-net:

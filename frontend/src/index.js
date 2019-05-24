@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from "jquery";
+
+import 'bootstrap-material-design';
+
+import CONST from './config';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -13,9 +18,8 @@ import * as serviceWorker from './serviceWorker';
 // end polyfill
 
 // Material Design Bootstrap
-import 'bootstrap-material-design';
 
-import './index.css';
+import './styles/main.scss';
 
 ReactDOM.render(<App />, document.getElementById('root'),
     () => {
@@ -23,6 +27,8 @@ ReactDOM.render(<App />, document.getElementById('root'),
         $('body').bootstrapMaterialDesign();
     }
 );
+
+console.log(CONST.API_URL);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
