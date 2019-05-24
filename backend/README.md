@@ -1,7 +1,7 @@
 # php-react
-Symfony backend with react frontend
+Symfony backend API
 
-### First boot with docker
+### First boot with docker (recommended)
 1. in host console, execute:
 ```
 docker-compose up
@@ -14,11 +14,28 @@ docker-compose exec php-fpm bash
 ```
 composer install
 ```
+
+4. create db tables
+```
+php bin/console doctrine:schema:update --force
+```
+
 5. connect from mysqladmin docker to docker mysql:
+```
+http://localhost:8001/
+```
+
+```
 server: mysql
 user:root
 pwd:docker_root
+```
 
+6. Create example data
+execute SQL script in
+```
+db/2-data.sql
+```
 
 ### First boot in local environment
 1. install php 7
@@ -34,14 +51,16 @@ compose install
 1. Only if working with local database
     1. create user
     ```
-        user:sf4_user
-        pwd:sf4_pw
+        user:ngcommx_user
+        pwd:ngcommx_pw
     ```
 
-    2. create database sf4_db
-    3. execute script db/script.sql
+    2. create database ngcommx
+    3. execute scripts
+        - db/1-init.sql
+        - db/2-data.sql
 
-    4. grant user sf4_user to manage sf4_db
+    4. grant user ngcommx_user to manage ngcommx
 
 2. log in docker php-fpm and execute
 ```
