@@ -1,0 +1,17 @@
+<div class="row data" key={user.idUser}>
+    <div class="col-3">{user.name}</div>
+    <div class="col-3">{user.surname}</div>
+    <div class="col-3">{user.email}</div>
+    <div class="col-1">{user.role}</div>
+    <div class="col-2 d-flex actions">
+        <button class="btn btn-raised btn-info bmd-btn-fab bmd-btn-fab-sm">
+            <FontAwesomeIcon icon={faKey} class="act" />
+        </button>
+        <button class="btn btn-raised btn-info bmd-btn-fab bmd-btn-fab-sm">
+            <FontAwesomeIcon icon={faEdit} class="act" />
+        </button>
+        <button class="btn btn-info bmd-btn-fab bmd-btn-fab-sm">
+            <FontAwesomeIcon icon={faTrash} class="act" />
+        </button>
+    </div>
+</div>
