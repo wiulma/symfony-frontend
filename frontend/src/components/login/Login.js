@@ -46,7 +46,7 @@ export default function() {
         this.setState({ passwordView: Number(this.state.passwordView == 0)});
     }
 */
-    function handleLogin(evt) {
+    const handleLogin = (evt) => {
         evt.preventDefault();
         alert('login');
         /*
@@ -64,6 +64,10 @@ export default function() {
             */
     }
 
+    const handlePwd = () => {
+        setPasswordView(passwordView ? 0 : 1);
+    }
+
     return (
         <div className="card col-12 col-xs-9 col-md-6 col-xl-4 mx-auto login">
             <h5 className="card-header bg-primary">Login</h5>
@@ -77,7 +81,7 @@ export default function() {
                         <label htmlFor="password" className="bmd-label-floating">Password</label>
                         <div className="input-group col-sm-12 icon">
                             <input type={pwdLayout[passwordView].type} className="form-control" name="password" id="password"/>
-                            <span onClick={ () => setPasswordView(!passwordView)}><FontAwesomeIcon icon={pwdLayout[passwordView].icon} size="2x"/></span>
+                            <span onClick={handlePwd}><FontAwesomeIcon icon={pwdLayout[passwordView].icon} size="2x"/></span>
                         </div>           
                     </div>
                     <button type="submit" className="btn btn-raised btn-primary">Submit</button>
