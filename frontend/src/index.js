@@ -4,8 +4,6 @@ import $ from "jquery";
 
 import 'bootstrap-material-design';
 
-
-
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

@@ -7,12 +7,13 @@ class StorageFactory {
 
   constructor() {
       if (!StorageFactory.instance) {
-        if (('indexedDB' in window) && !isMicrosoftBrowser()) {
-          console.log('Use IndexedDB');
-          StorageFactory.instance = StorageIndexDbService;
-        } else {
+        // if (('indexedDB' in window) && !isMicrosoftBrowser()) {
+        //  console.log('Use IndexedDB');
+        //  StorageFactory.instance = StorageIndexDbService;
+        //  StorageFactory.instance.init();
+        //} else {
           StorageFactory.instance = LocalStorageService;
-        }
+        //}
       }
       return StorageFactory.instance;
   }

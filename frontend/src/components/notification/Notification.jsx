@@ -1,46 +1,19 @@
-import * as React from 'react';
-import {default as notificationService} from './NotificationService';
+import React, {useState, useEffect} from 'react';
+import notificationService from './NotificationService';
 
 import './_styles.scss';
 
-export class NotificationAlert  {
 
-  ALERT_VISIBLE_TIMEOUT = 10;
-    
-  constructor(props) {
-    super(props);
+export default function() {
 
-    this.handleDismiss = this.handleDismiss.bind(this);
-    this.showMessage = this.showMessage.bind(this);
-    this.renderMessageDetails = this.renderMessageDetails.bind(this);
+  const ALERT_VISIBLE_TIMEOUT = 10;
 
-    this.state = {
-      show: false
-    };
-  }
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({type: '', message: '', title: ''});
 
-  componentDidMount() {
-    notificationService.subscribe("NotifyAlert", this.showMessage);
-  }
-
-  componentWillUnmount() {
-    notificationService.unsubscribe("NotifyAlert", this.showMessage);
-  }
-
-  showMessage(detail) {
-    this.setState({ show: true, notification: detail})
-    setTimeout(this.hideMessage.bind(this), (this.ALERT_VISIBLE_TIMEOUT * 1000));
-  }
-
-  hideMessage() {
-    if (this.state.show) {
-      this.handleDismiss();
-    }
-  }
-
-  renderMessageDetails() {
+  const renderMessageDetails = () => {
     const list = [];
-    let details = this.state.notification.details;
+    let details = notification.details;
     if (!details) return [];
     if (typeof(details) === "string") details = [details];
     for (let i=0, l=details.length; i<l; i++) {
@@ -49,23 +22,38 @@ export class NotificationAlert  {
     return list;
   }
 
-  handleDismiss() {
-    this.setState({ show: false, notification: null });
+  const handleDismiss = () => {
+    setShow(false);
+    setNotification(null);
   }
 
-  render() {
-    if (this.state.show && this.state.notification) {
-      return (
-        <div className={'alert alert-'+this.state.notification.type+' fade show notification'} role="alert">
-          <h5 className="alert-heading">{this.state.notification.title}</h5>
-          <p className="m-0 message">{this.state.notification.message}</p>
-          {this.renderMessageDetails()}
-          <button type="button" className="close" data-dismiss="alert" onClick={this.handleDismiss} aria-label="Close">
+  useEffect(() => {
+    const subscription = notificationService.getMessage().subscribe(message => {
+      setNotification(message);
+      setShow(true)
+      setTimeout(() => {
+        if (show) {
+          handleDismiss();
+        }
+      }, (ALERT_VISIBLE_TIMEOUT * 1000));
+    });
+
+    return function cleanup() {
+      subscription.unsubscribe();
+    }
+  }, [show]);
+
+  return(
+     (show && notification) ?
+      (
+        <div className={'alert alert-'+notification.type+' fade show notification'} role="alert">
+          <h5 className="alert-heading">{notification.title}</h5>
+          <p className="m-0 message">{notification.message}</p>
+          {renderMessageDetails()}
+          <button type="button" className="close" data-dismiss="alert" onClick={handleDismiss} aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-      ) 
-    } else 
-    return null;    
-  }
+      ) : null 
+  );
 }

@@ -24,7 +24,7 @@ export function login(formData) {
     .then(async (user) => {
       await storage.save("user", user);
       return await storage.get("user");
-    });
+    })
 }
 
 export async function logout() {

@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-// import {RouteComponentProps} from 'react-router';
+import React, {useState} from 'react';
+import { withRouter } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +8,7 @@ import notificationService from '../notification/NotificationService';
 
 import './_styles.scss';
 
-export default function() {
+export default withRouter(function(props) {
 
     const pwdLayout = [
         {
@@ -28,9 +28,9 @@ export default function() {
         evt.stopPropagation();
         login(new FormData(evt.target))
             .then( (data)=> {
-                this.props.history.push('/private', {user: data})
+                props.history.push('/private', {user: data})
             })
-            .catch ((exc) => {
+            .catch (exc => {
                 console.error(exc);
                 notificationService.error({
                     title: 'Login error',
@@ -61,5 +61,5 @@ export default function() {
         </div>
     );
 
-}
+});
 
