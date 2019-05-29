@@ -4,7 +4,8 @@ import * as React from 'react';
 
  // <ContentHeader title="Welcome to ROW - Report on the Web"></ContentHeader>
 
-export default 
+export default () => (
         <div className="row m-0 w-100 flex justify-content-start">
-            header
-        </div>;
+            home
+        </div>
+);

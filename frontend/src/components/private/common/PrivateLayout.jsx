@@ -17,19 +17,16 @@ export default withRouter(function(props) {
         return;
     }
 
-    const [showHideSidenav, setShowHideSidenav] = useState(true);
     const [user, setUser] = useState(props.location.state.user);
 
     useEffect(() => {
         $(ReactDOM.findDOMNode(this)).bootstrapMaterialDesign();
-    }, [true]);
-
+    }, []);
 
     const doLogout = () => {
         setUser(null);
         logout()
             .then(() => {
-                debugger;
                 props.history.push('/')
             });
     }
@@ -48,12 +45,10 @@ export default withRouter(function(props) {
             loading: LoaderComponent
         });
     }
-    debugger;
     // <NavBar user={user} logout={doLogout}></NavBar>
     return (
         <div className="container-fluid min-100 d-flex flex-column h-100 p-0">
-            <div>navbar</div>
-            <Component {...{component: Component, user, showHideSidenav}}></Component>
+            <Component {...{component: Component, user}}></Component>
         </div>
     );
 

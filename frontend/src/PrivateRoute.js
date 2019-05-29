@@ -6,11 +6,10 @@ import LoaderComponent from './components/loader/LoaderComponent';
 
 export default withRouter(function(props) {
 
-    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect( () => {
-        debugger;
         console.log("useEffect");
         storage.get("user")
             .then(user => {
@@ -19,10 +18,8 @@ export default withRouter(function(props) {
                 pl.state.user = user;
                 setUser(user);
                 setLoading(false);
-                
             });
-
-    }, [user, loading]);
+    }, []);
 
 
     if (loading) {
