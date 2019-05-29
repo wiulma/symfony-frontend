@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const taskUtils = require('./utils/task')();
@@ -15,7 +15,7 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: 'js/[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
   
@@ -36,21 +36,38 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            'resolve-url-loader',
-            { 
-              loader: 'sass-loader', 
-              options: {
-                includePaths: ['./node_modules']
-              }
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: false,
+              name: '[name].[ext]',
+              outputPath:'assets'
             }
-          ]
-        })
-      }
+          },
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: []
+            }
+          },
+          'sass-loader',
+        ]
+      },        
+      {
+        test: /\.(png|svg|jpg|gif|eot)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {name: '[name].[ext]', outputPath:'assets'}
+          }
+        ]
+      },
+      { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2', name: '[name].[ext]', outputPath:'assets' } },
+      { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff', name: '[name].[ext]', outputPath:'assets' } },
+      { test: /\.(ttf|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader', options: {name: '[name].[ext]', outputPath:'assets'} } 
     ]
   },
   plugins: [
@@ -69,9 +86,9 @@ module.exports = merge(common, {
       }
     ]),
     new webpack.DefinePlugin(taskUtils.iterObj(require('./config/config.prod.json'))),
-    new ExtractTextPlugin(
-        {filename: '[name].[hash].css', disable: false, allChunks: true}
-      ),
+    new MiniCssExtractPlugin({
+      filename: `assets/[name].css`
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index-prod.tmpl',
       filename: 'index.html',
