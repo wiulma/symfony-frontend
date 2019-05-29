@@ -1,3 +1,10 @@
+import "@babel/polyfill";
+
+import '@webcomponents/webcomponentsjs/webcomponents-bundle';
+
+import "formdata-polyfill";
+import "whatwg-fetch";
+
 import 'bootstrap';
 import 'mdbootstrap';
 

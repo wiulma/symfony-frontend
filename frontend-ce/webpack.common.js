@@ -7,8 +7,9 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
+    polyfill: '@babel/polyfill',
     app: './src/app.js',
-    lib: glob.sync(path.resolve(__dirname, './lib/*.js'))
+    /*lib: glob.sync(path.resolve(__dirname, './lib/*.js'))*/
   },
   output: {
     filename: '[name].js',
@@ -23,6 +24,11 @@ module.exports = {
                 name: 'vendors',
                 enforce: true,
                 chunks: 'all'
+            },
+            commons: {
+              name: 'commons',
+              chunks: 'initial',
+              minChunks: 2
             }
         }
     }

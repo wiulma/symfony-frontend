@@ -9,21 +9,24 @@ const taskUtils = require('./utils/task')();
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
   mode: 'production',
+  devtool: false,
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
+  
   optimization: {
     minimizer: [
       new TerserPlugin({
         parallel: true,
-        sourceMap: true,
+        sourceMap: false,
         terserOptions: {
           output: {
-            comments: false,
+            comments: false
           },
         },
       }),
@@ -51,6 +54,13 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
+    
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: '../webpack-analizer/report.html',
+      openAnalyzer: false
+    }),
+    
     new CopyWebpackPlugin([
       {
         from: './lib/**/*',
@@ -65,7 +75,7 @@ module.exports = merge(common, {
     new HtmlWebpackPlugin({
       template: 'src/index-prod.tmpl',
       filename: 'index.html',
-      inject: false,
+      inject: 'body',
       hash: true,
       showErrors: true,
       chunksSortMode: 'none'

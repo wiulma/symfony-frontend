@@ -20,7 +20,7 @@ module.exports = merge(common, {
     new webpack.DefinePlugin(taskUtils.iterObj(require('./config/config.dev.json'))),    
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      inject: false,
+      inject: 'body',
       chunksSortMode: 'none'
     })    
   ]
