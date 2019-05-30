@@ -2,7 +2,7 @@ import Navigo from 'navigo'
 import viewService from './ViewService'
 import storageService from './StorageService'
 import Const from '../const';
-import MaskService from '../components/loader/MaskService';
+import loaderService from '../components/loader/LoaderService';
 /**
  * Routing service
  * @description routing service manager
@@ -40,14 +40,14 @@ export default {
       })
       .on('private', () => {
         try {
-          MaskService.mask("main")
+          loaderService.show("main")
           this.loadPrivateModule()
             .catch(() => {
               this.router.navigate('/');
             })
-            .finally( () => MaskService.unmask("main"))
+            .finally( () => loaderService.hide("main"))
         } catch (exc) {
-          MaskService.unmask("main")
+          loaderService.hide("main")
           this.router.navigate('');
         }
       })
