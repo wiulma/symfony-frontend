@@ -4,12 +4,15 @@ const common = require('./webpack.common.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const taskUtils = require('./utils/task')();
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const path = require('path');
 
 module.exports = merge(common, {
   mode: 'development',
   devServer: {
-    hot: true
+    host: '0.0.0.0',
+    contentBase: path.resolve(__dirname),
+    watchContentBase: true,
+    port: 8080
   },
   module: {
     rules: [
