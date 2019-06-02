@@ -1,7 +1,8 @@
 import domUtils from './../../../../utils/Dom';
-import template from './home.html';
+import template from './home.html.js';
 import routingService from '../../../../services/RoutingService'
-import userService from '../../services/UserAuthService'
+import userAuthService from '../../services/UserAuthService'
+import i18nService from './../../../../services/I18nService';
 
 import './home.scss';
 
@@ -16,10 +17,11 @@ customElements.define('app-home', class extends HTMLElement {
     }
 
     connectedCallback() {
-        const n = domUtils.htmlToElement(template);
-
-        n.querySelector('#menuChangePwd').addEventListener('click', this.listeners.changePassword)
-        n.querySelector('#menuLogout').addEventListener('click', this.listeners.logout)
+        const tmpl = template(userAuthService.profile);
+        const n = domUtils.htmlToElement(tmpl);
+        i18nService.localize(n);
+        n.querySelector('#mnuChangePwd').addEventListener('click', this.listeners.changePassword)
+        n.querySelector('#mnuLogout').addEventListener('click', this.listeners.logout)
         this.appendChild(n);
     }
 
@@ -28,7 +30,7 @@ customElements.define('app-home', class extends HTMLElement {
     }
 
     logout() {
-        userService.logout()
+        userAuthService.logout()
             .then(routingService.logout.bind(routingService));
     }
 

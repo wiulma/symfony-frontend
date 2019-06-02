@@ -17,6 +17,10 @@ customElements.define('app-login', class extends HTMLElement {
     };    
   }
 
+  disconnectedCallback() {
+    this.querySelector('.login').removeEventListener("click", this.listeners['btnLogin']);
+  }
+
   connectedCallback() {
     const n = domUtils.htmlToElement(template);
     n.querySelector('.login').addEventListener("click", this.listeners['btnLogin']);
@@ -24,20 +28,17 @@ customElements.define('app-login', class extends HTMLElement {
     this.appendChild(n);
   }
 
-  disconnectedCallback() {
-    const btnLogin = this.querySelector('.login')
-    btnLogin.removeEventListener("click", this.listeners['btnLogin']);
-  }
-
-  doLogin (evt) {
+  doLogin(evt) {
     evt.preventDefault();
+    const btnLogin = this.querySelector('.login');
+    btnLogin.removeEventListener("click", this.listeners['btnLogin']);
     loginService.doLogin(new FormData(this.querySelector('#loginForm')))
         .then( (data) => {
           routingService.get().navigate("private");
         })
         .catch((err) => {
           notificationService.show("Login failed", notificationService.STYLE.ERROR);
+          btnLogin.addEventListener("click", this.listeners['btnLogin']);
         });
   }
-
 });

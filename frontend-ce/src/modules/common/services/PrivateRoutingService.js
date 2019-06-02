@@ -1,10 +1,11 @@
-import userService from './UserAuthService'
+import userAuthService from './UserAuthService'
 import routingService from '../../../services/RoutingService'
 
 export default {
 
   authGuard(done, params) {
-    return userService.checkAuth()
+    debugger;
+    return userAuthService.checkAuth()
       .then(() => {
         console.log("userService.checkAuth done");
         done();

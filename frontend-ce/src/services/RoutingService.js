@@ -40,14 +40,15 @@ export default {
       })
       .on('private', () => {
         try {
-          loaderService.show("main")
+          loaderService.show("main");
+          viewService.emptyMainContainer();
           this.loadPrivateModule()
             .catch(() => {
               this.router.navigate('/');
             })
             .finally( () => loaderService.hide("main"))
         } catch (exc) {
-          loaderService.hide("main")
+          loaderService.hide("main");
           this.router.navigate('');
         }
       })

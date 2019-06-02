@@ -1,4 +1,5 @@
-<div class="wrapper">
+export default (user) => {
+    return `<div class="wrapper">
         <!-- Bootstrap NavBar -->
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -45,4 +46,5 @@
             <app-dashboard></app-dashboard>
         </div>
     
-    </div>
+    </div>`;
+}

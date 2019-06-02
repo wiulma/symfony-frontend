@@ -1,12 +1,12 @@
 import viewService from './../../services/ViewService'
 import routingService from './../../services/RoutingService'
 import privateRoutingService from '../common/services/PrivateRoutingService'
-import userService from '../common/services/UserAuthService'
+import userAuthService from '../common/services/UserAuthService'
 
 export default {
 
   init() {
-    return userService.checkAuth()
+    return userAuthService.getProfile()
       .then(() => {
         this.initRoutes();
         this.initContent();

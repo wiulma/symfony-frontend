@@ -13,6 +13,10 @@ app-home {
 
     .navbar {
         margin-bottom: 0px;
+
+        &.navbar-dark .navbar-nav .nav-item .dropdown-menu .nav-link {
+            color: #000;
+        }
     }
 
     .wrapper {

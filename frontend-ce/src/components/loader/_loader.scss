@@ -3,16 +3,75 @@ $duration: 1.4s;
 
 app-loader {
 
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #cfd3d51c;
-    top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cfd3d51c;
+  top: 0;
 
+  .loader,.loader:before,.loader:after{
+    top:0;
+    bottom:0;
+    left:0;
+    right:0; 
+    content:"";
+    position:absolute;
+    border-radius:50%;
+  }
+
+  .loader{
+    position:fixed;
+    width:100px;
+    height:100px;
+    margin:auto;
+    animation:spin 4s linear infinite;
+  }
+  
+  @keyframes spin{
+    100%{transform:rotate(360deg);filter:hue-rotate(360deg)}
+  }
+  
+  .loader:before{
+    border:5px solid #aaa;
+    border-bottom:5px solid orange;
+    border-left:5px solid orange;
+    animation:spin1 1s linear infinite;
+  }
+  
+  .loader:after{
+    border:5px solid #aaa;
+    border-top:5px solid transparent;
+    border-right:5px solid transparent;
+    animation:spin2 1s linear infinite;
+  }
+  
+  @keyframes spin1{
+    20%{transform:rotate(150deg)}
+    40%{transform:rotate(300deg)}
+    80%{transform:rotate(300deg)}
+    100%{transform:rotate(360deg)}
+  }
+  
+  @keyframes spin2{
+    0%{transform:rotate(-30deg)}
+    20%{transform:rotate(-30deg);
+        border-color:transparent transparent #aaa #aaa}
+    21%{border-color:orange orange transparent transparent}
+    40%{transform:rotate(-30deg)}
+    60%{transform:rotate(120deg);
+        border-color:orange orange transparent transparent}
+    61%{border-color:transparent transparent #aaa #aaa}
+    80%{transform:rotate(270deg)}
+    100%{transform:rotate(330deg);}
+  }
+
+
+
+/*
     .spinner {
       animation: rotator $duration linear infinite;
     }
@@ -50,4 +109,6 @@ app-loader {
       transform:rotate(450deg);
     }
     }
+    */
+    
 }

@@ -20,6 +20,13 @@ export default {
       component: "home-user",
       module: "private-user"
     }
-  }
+  },
+
+  emptyMainContainer() {
+    const n = document.getElementById(this.ROOT_AREA);
+    n.removeChild(n.firstElementChild);
+  },
+
+
 
 }
