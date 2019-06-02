@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
@@ -22,6 +24,7 @@ class User {
      * @var string
      * @ORM\Column(name="name", type="string", length=100)
      * @Assert\NotBlank
+     * @Groups({"profile"})
      */
     private $name;
 
@@ -29,6 +32,7 @@ class User {
      * @var string
      * @ORM\Column(name="surname", type="string", length=100)
      * @Assert\NotBlank
+     * @Groups({"profile"})
      */
     private $surname;
 
@@ -43,6 +47,7 @@ class User {
      * @ORM\Column(name="email", type="string", length=100)
      * @Assert\Email
      * @Assert\NotBlank
+     * @Groups({"profile"})
      */
     private $email;
 
@@ -85,6 +90,16 @@ class User {
 
     public function getEmail() {
         return $this->email;
+    }
+
+    /**
+     * // needs jms serializer in order to work:
+     * https://symfonycasts.com/screencast/symfony-rest/serializer-basics
+     * @Serializer\VirtualProperty()
+     * @Groups({"profile"})
+     */
+    public function getFullname() {
+        return $this->surname. " ".$this->name;
     }
 
 }

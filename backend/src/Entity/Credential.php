@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
@@ -17,6 +18,7 @@ class Credential implements UserInterface {
      * @ORM\Id
      * @ORM\Column(name="userId", type="integer")
      * @Assert\NotBlank
+     * @Groups({"full"})
      */
     private $userId;
 
@@ -24,6 +26,7 @@ class Credential implements UserInterface {
      * @var string
      * @ORM\Column(name="username", type="string", length=100)
      * @Assert\NotBlank
+     * @Groups({"profile"})
      */
     private $username;
 
@@ -38,6 +41,7 @@ class Credential implements UserInterface {
      * @var string
      * @ORM\Column(name="role", type="enumrole", length=1)
      * @Assert\NotBlank
+     * @Groups({"profile"})
      */
     private $role;
 

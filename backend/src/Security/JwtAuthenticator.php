@@ -70,7 +70,15 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return true;
+        $data = $this->jwtEncoder->decode($credentials);
+
+        if (!$data){
+            return false;
+        }
+
+        $data = json_decode(json_encode($data), true);
+
+        return $data['data']['userId'] === $user->getUserId();
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)

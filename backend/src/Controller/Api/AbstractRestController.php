@@ -53,7 +53,7 @@ class AbstractRestController extends AbstractController
 
         $serializer = new Serializer($normalizers, $encoders);
 
-        return $serializer->serialize($obj, 'json');
+        return $serializer->serialize($obj, 'json', ['skip_null_values' => true]);
     }
 
     public function serializeList($list, $mapper = NULL)
@@ -65,7 +65,7 @@ class AbstractRestController extends AbstractController
         $serializer = new Serializer($normalizers, $encoders);
 
         foreach ($list as $item) {
-            $result[] = $mapper ? $mapper->serializeListItem ($item) : $serializer->serialize($item, 'json');
+            $result[] = $mapper ? $mapper->serializeListItem ($item) : $serializer->serialize($item, 'json', ['skip_null_values' => true]);
         }
 
         return $result;
