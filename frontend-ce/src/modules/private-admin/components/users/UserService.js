@@ -10,7 +10,7 @@ export default {
     try {
       return fetch(`${API_URL}/api/users`, {
         headers: {
-          'Authorization': `Bearer ${userAuthService.profile.token}`
+          'Authorization': `Bearer ${userAuthService.auth.token}`
         }
       })
       .then((response) => response.ok)

@@ -10,8 +10,6 @@ const common = require('./webpack.common.js'),
       CompressionPlugin = require("compression-webpack-plugin"),
       CleanWebpackPlugin = require('clean-webpack-plugin');
 
-debugger;
-
 module.exports = merge(common, {
     mode: "production",
     devtool: "source-map",

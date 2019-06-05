@@ -2,11 +2,11 @@ export default {
 
   STYLE: {
     SUCCESS: 'success',
-    ERROR: 'error'
+    ERROR: 'danger'
   },
 
-  show(text, style = "") {
-    const evt = new CustomEvent("showNotification", {detail: {text, style}})
+  show(message, style = "danger") {
+    const evt = new CustomEvent("showNotification", {detail: {message, style}})
     document.dispatchEvent(evt);
   }
 }

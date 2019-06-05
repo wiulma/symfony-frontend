@@ -18,8 +18,21 @@ customElements.define('app-home', class extends HTMLElement {
     }
 
     connectedCallback() {
+        performance.mark("template-0");
+        const str = domUtils.bind(template2, {user: userAuthService.profile});
+        const n1 = domUtils.htmlToElement(str);
+        performance.mark("template-1");
         const tmpl = template(userAuthService.profile);
         const n = domUtils.htmlToElement(tmpl);
+        performance.mark("template-2");
+
+        performance.measure("template 1", "template-0", "template-1");
+
+        performance.measure("template 2", "template-1", "template-2");
+        console.log(performance.getEntriesByType("measure"));
+        performance.clearMarks();
+        performance.clearMeasures();
+
         i18nService.localize(n);
         n.querySelector('#mnuChangePwd').addEventListener('click', this.listeners.changePassword)
         n.querySelector('#mnuLogout').addEventListener('click', this.listeners.logout)

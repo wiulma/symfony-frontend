@@ -1,29 +1,14 @@
 import domUtils from '../../utils/Dom';
-import template from './notification.html';
+import template from './notification.html.js';
+
+import './_notification.scss';
 
 customElements.define('app-notification', class extends HTMLElement {
 
 	constructor() {
 		super();
+		this.message = '';
 		this.onShow = this.show.bind(this)
-	}
-
-	static get observedAttributes() {
-		return [
-			'message'
-		]
-	}
-
-	get message() {
-		if (!this.hasAttribute('message')) {
-			return []
-		}
-
-		return JSON.parse(this.getAttribute('message'))
-	}
-
-	set message(value) {
-		this.setAttribute('message', JSON.stringify(value))
 	}
 
 	connectedCallback() {
@@ -34,18 +19,14 @@ customElements.define('app-notification', class extends HTMLElement {
 		document.removeEventListener("showNotification", this.onShow)
 	}
 
-
-	show(evt, data) {
-		this.message = data;
-	}
-
-	attributeChangedCallback() {
-		this.notifyMessage()
+	show(evt) {
+		this.message = evt.detail;
+		(this.message != '') && this.notifyMessage()
 	}
 
 	notifyMessage() {
-		const {text, style} = this.message;
-		const n = domUtils.htmlToElement(domUtils.bindData(template, this.message));
+		const tmpl = template(this.message);
+        const n = domUtils.htmlToElement(tmpl);
 
 		n.addEventListener('closed.bs.alert', () => {
 			this.firstElementChild.parentNode.removeChild(this.firstElementChild)

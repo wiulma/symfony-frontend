@@ -8,18 +8,23 @@ import Const from '../../../const'
 export default {
 
   profile: {},
+  auth: {},
 
   getProfile() {
-    if (!this.profile.token) {
-      this.profile = storageService.get(Const.USER_PROFILE_KEY)
+    if (!this.auth.token) {
+      this.auth = storageService.get(Const.USER_PROFILE_KEY)
     }
     try {
       return fetch(`${API_URL}/api/profile`, {
         headers: {
-          'Authorization': `Bearer ${this.profile.token}`
+          'Authorization': `Bearer ${this.auth.token}`
         }
       })
-      .then((response) => response.ok)
+      .then(response => Promise.all([response, response.json()]))
+      .then(([response, data]) => {
+        response.ok && (this.profile = data);
+        return response.ok;
+      })
       .catch(() => false);
     } catch (exc) {
       return Promise.reject(false);
@@ -30,7 +35,7 @@ export default {
     try {
       return fetch(`${API_URL}/api/auth`, {
         headers: {
-          'Authorization': `Bearer ${this.profile.token}`
+          'Authorization': `Bearer ${this.auth.token}`
         }
       })
       .then((response) => response.ok)
