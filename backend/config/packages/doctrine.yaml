@@ -16,6 +16,9 @@ doctrine:
             collate: utf8mb4_unicode_ci
 
         url: '%env(resolve:DATABASE_URL)%'
+        mapping_types:
+            enum: string
+            set: string
         types:
             enumgender: App\Type\GenderType
             enumrole: App\Type\RoleType
