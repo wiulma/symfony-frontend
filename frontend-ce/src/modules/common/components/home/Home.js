@@ -1,6 +1,5 @@
 import domUtils from './../../../../utils/Dom';
 import template from './home.html.js';
-import template2 from './home.html';
 import routingService from '../../../../services/RoutingService'
 import userAuthService from '../../services/UserAuthService'
 import i18nService from './../../../../services/I18nService';

@@ -1,0 +1,14 @@
+@import "~daemonite-material/assets/scss/colors";
+@import "~daemonite-material/assets/scss/variables/palette";
+
+$primary: (
+  color: #ffc107,
+  dark:  darken(#ffc107, 10%),
+  light: lighten(#ffc107, 10%)
+) !default;
+
+$secondary: (
+    color: #ffc107,
+    dark:  darken(#ffc107, 10%),
+    light: lighten(#ffc107, 10%)0
+) !default;

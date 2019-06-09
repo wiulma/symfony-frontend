@@ -1,27 +1,41 @@
-<div class="card">
+<div class="card" style="width: 40rem;">
 
-  <h5 class="card-header info-color white-text text-center py-4">
-    <strong>Login</strong>
-  </h5>
+	<h3 class="card-header info-color white-text text-center py-4">
+		<strong>Login</strong>
+	</h3>
 
-  <div class="card-body px-lg-5">
+	<div class="card-body px-lg-5">
 
-    <form id="loginForm" class="text-center">
+		<form id="loginForm" class="text-center">
 
-      <div class="md-form">
-        <input type="text" id="username" name="username" required class="form-control" size=40>
-        <label for="username">Username</label>
-      </div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="floating-label floating-label-lg">
+						<label for="username" data-i18n="Username"></label>
+						<input type="text" id="username" name="username" required class="form-control" size=40 autofocus>
+					</div>
+					<span class="input-group-icon" id="exampleIconInput7Help">
+						<i class="fas fa-user fa-2x"></i>
+					</span>
+				</div>
+			</div>
 
-      <div class="md-form">
-        <input type="password" id="password" name="password" required class="form-control" size=40>
-        <label for="password">Password</label>
-      </div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="floating-label floating-label-lg">
+						<label for="password" data-i18n="Password"></label>
+						<input type="password" id="password" name="password" required class="form-control" size=40>
+					</div>
+					<span class="input-group-icon" id="exampleIconInput2Help">
+						<i class="fas fa-key fa-2x"></i>
+					</span>
+				</div>
+			</div>
 
-      <button class="btn btn-primary float-right login" data-i18n="login"></button>
+			<button class="btn btn-primary float-right login" data-i18n="login"></button>
 
-    </form>
+		</form>
 
-  </div>
+	</div>
 
 </div>

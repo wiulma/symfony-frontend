@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 import './login.scss';
 
 import domUtils from '../../utils/Dom';
@@ -6,7 +8,6 @@ import loginService from '../../services/LoginService';
 import routingService from '../../services/RoutingService';
 import i18nService from '../../services/I18nService';
 import notificationService from '../notification/NotificationService';
-import loaderService from '../loader/LoaderService';
 
 customElements.define('app-login', class extends HTMLElement {
 
@@ -37,7 +38,7 @@ customElements.define('app-login', class extends HTMLElement {
           routingService.get().navigate("private");
         })
         .catch((err) => {
-          notificationService.show("Login failed", notificationService.STYLE.ERROR);
+          notificationService.show({title: i18next.t("LoginFailed"), message: i18next.t("InvalidCredentials")}, notificationService.STYLE.ERROR);
           btnLogin.addEventListener("click", this.listeners['btnLogin']);
         });
   }

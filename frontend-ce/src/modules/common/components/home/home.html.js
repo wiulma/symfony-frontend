@@ -1,6 +1,5 @@
 export default (user) => {
     return `<div class="wrapper">
-        <!-- Bootstrap NavBar -->
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -24,24 +23,24 @@ export default (user) => {
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown account">
                         <a class="nav-link dropdown-toggle" id="dropdownMenuButton" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <FontAwesomeIcon icon={faUser} size="1x" />
+                            <i class="fas fa-user" size="1x"></i>
                             <span class="label">${user.name}</span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a href="#" id="mnuChangePwd" class="nav-link" data-i18n="ChangePassword"></a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a href="#" id="mnuChangePwd" class="dropdown-item nav-link">
+                                <i class="fas fa-key" class="menu-icon"></i>
+                                <span class="label" data-i18n="ChangePassword"></span>
+                            </a>
+                            <a href="#" id="mnuLogout" class="dropdown-item nav-link">
+                                <i class="fas fa-sign-out-alt" class="menu-icon"></i>
+                                <span class="label" data-i18n="Logout"></span>
+                            </a>
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" id="mnuLogout" class="nav-link">
-                            <FontAwesomeIcon icon={faSignOutAlt} class="menu-icon" />
-                            <span class="label" data-i18n="Logout"></span>
-                        </a>
                     </li>
                 </ul>
             </div>
-        </nav><!-- NavBar END -->
+        </nav>
     
-        <!-- MAIN -->
         <div class="col" id="main-content">
             <app-dashboard></app-dashboard>
         </div>

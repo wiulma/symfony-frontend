@@ -69,8 +69,6 @@ module.exports = {
       jQuery: 'jquery',
       'window.$': 'jquery',
       'window.jQuery': 'jquery',
-      Waves: 'node-waves',
-      _: 'underscore',
       Promise: 'es6-promise',
     }),
 

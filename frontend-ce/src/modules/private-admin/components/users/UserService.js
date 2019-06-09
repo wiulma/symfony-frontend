@@ -1,10 +1,11 @@
-import Const from '../../../const'
 import userAuthService from '../../../common/services/UserAuthService'
 /**
  * User Service
  * @description Client service in order to call user related APIs
  */
 export default {
+
+  data: [],
 
   getList() {
     try {
@@ -13,7 +14,11 @@ export default {
           'Authorization': `Bearer ${userAuthService.auth.token}`
         }
       })
-      .then((response) => response.ok)
+      .then(response => Promise.all([response, response.json()]))
+      .then(([response, data]) => {
+        response.ok && (this.data = data);
+        return data;
+      })
       .catch(() => false);
     } catch (exc) {
       return Promise.reject(false);

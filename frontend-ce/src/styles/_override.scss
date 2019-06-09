@@ -1,0 +1,6 @@
+@import "./fonts/fontawesome.scss";
+
+.dropdown-toggle::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f107"
+}

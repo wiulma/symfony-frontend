@@ -1,7 +1,7 @@
 
 import domUtils from '../../../../utils/Dom'
 import template from './dashboard.html'
-import './dashboard.scss'
+import './_dashboard.scss'
 
 customElements.define('app-dashboard', class extends HTMLElement {
 

@@ -6,7 +6,7 @@ import "formdata-polyfill";
 import "whatwg-fetch";
 
 import 'bootstrap';
-import 'mdbootstrap';
+import 'daemonite-material';
 
 import i18nService from './services/I18nService';
 

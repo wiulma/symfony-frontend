@@ -15,6 +15,7 @@ export default {
 
   initContent() {
     document.body.className = "private";
+    import ('../common/components/list-empty/ListEmpty');
     import ('../common/components/home/Home');
     import ('./components/profile-menu/ProfileMenu');
     import ('./components/dashboard/Dashboard');

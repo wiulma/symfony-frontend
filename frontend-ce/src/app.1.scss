@@ -1,13 +1,10 @@
-@import "~daemonite-material/assets/scss/material";
 
-@import "./styles/custom-theme";
+@import "~bootstrap/scss/bootstrap";
 
-@import "./styles/override";
+@import "node_modules/daemonite-material/assets/scss/material";
 
-@import './styles/list';
-
-@import "./styles/fonts/fontawesome";
-@import "./styles/fonts/fa-solid";
+@import "./scss/fontawesome.scss";
+@import "./scss/fa-solid.scss";
 
 
 body {

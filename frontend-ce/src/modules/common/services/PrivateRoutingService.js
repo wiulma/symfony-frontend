@@ -4,7 +4,6 @@ import routingService from '../../../services/RoutingService'
 export default {
 
   authGuard(done, params) {
-    debugger;
     return userAuthService.checkAuth()
       .then(() => {
         console.log("userService.checkAuth done");

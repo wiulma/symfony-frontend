@@ -1,5 +1,7 @@
 {
     "login": "Login",
+    "Username": "Username",
+    "Password": "Password",
     "Documents": "Documents",
     "Users": "Users",
     "Configurations": "Configurations",
@@ -8,5 +10,12 @@
     "ChangePassword": "Change Password",
     "DocTypes": "Document Types",
     "Logout": "Logout",
-    "UsersList": "Users List"
+    "UsersList": "Users List",
+    "LoginFailed": "Login Failed",
+    "InvalidCredentials": "Invalid Credentials",
+    "btnCreateUser": "Create User",
+    "Name": "Name",
+    "Surname": "Surname",
+    "Email": "Email",
+    "ListEmpty": "No data found"
 }
