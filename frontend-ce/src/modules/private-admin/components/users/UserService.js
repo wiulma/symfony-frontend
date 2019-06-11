@@ -23,6 +23,16 @@ export default {
     } catch (exc) {
       return Promise.reject(false);
     }
-  }
+  },
+
+  getById(id) {
+    return {}
+  },
+
+  search() {
+    return []
+  },
+
+
   
 }
