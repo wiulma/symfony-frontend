@@ -8,6 +8,7 @@ import loaderService from './../../../../components/loader/LoaderService';
 
 import tmplMain from './main.html'
 import tmplListItem from './ListItem.html.js'
+import tmplDetails from './UserDetail.html.js'
 import i18next from 'i18next';
 
 customElements.define('app-users', class extends HTMLElement {
@@ -81,8 +82,9 @@ customElements.define('app-users', class extends HTMLElement {
 			.forEach( n => n.removeEventListener('click', this.listeners.listItemHandler))
 	}
 
-	createUser() {
-		console.log('create user');
+	createUser(evt) {
+		const detail = domUtils.htmlToElement('<app-user-detail id=""></app-user-detail>');
+		document.body.appendChild(detail);
 	}
 
 	sort(evt) {
