@@ -1,10 +1,6 @@
-@import "~daemonite-material/assets/scss/material";
-
-@import "./styles/custom-theme";
+@import "./styles/base";
 
 @import "./styles/override";
-
-@import './styles/list';
 
 @import "./styles/fonts/fontawesome";
 @import "./styles/fonts/fa-solid";
@@ -79,12 +75,31 @@ i, span {
 .ripple {
     background-position: center;
     transition: background 0.3s;
-  }
-  .ripple:hover {
-    background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-  }
-  .ripple:active {
-    background-color: #6eb9f7;
+}
+
+.ripple:active {
     background-size: 100%;
     transition: background 0s;
-  }
+}
+
+.btn-primary {
+
+    &.ripple:hover {
+        background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+    }
+    
+    &.ripple:active {
+        background-color: #6eb9f7;
+    }
+}
+
+.btn-secondary {
+    
+    &.ripple:hover {
+        background: #6c757d radial-gradient(circle, transparent 1%, #6c757d 1%) center/15000%;
+    }
+    
+    &.ripple:active {
+        background-color: #6c757d;
+    }
+}

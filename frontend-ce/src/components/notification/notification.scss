@@ -1,0 +1,19 @@
+.notification {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    min-width: 250px;
+    padding: .2rem 1rem;
+
+    p {
+        margin: 0;
+        color: #000;
+    }
+
+    &.alert-dismissible {
+
+        button.close {
+            padding: .2rem
+        }
+    }
+} 

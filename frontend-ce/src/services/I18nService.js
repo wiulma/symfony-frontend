@@ -19,7 +19,6 @@ export default {
         .use(XHR)
         .use(LanguageDetector)
         .init({
-          keySeparator: false,
           fallbackLng: 'it',
           load: 'languageOnly',
           lng: 'en',

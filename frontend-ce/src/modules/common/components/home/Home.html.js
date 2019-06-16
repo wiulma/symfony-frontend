@@ -1,6 +1,6 @@
 export default (user) => {
     return `<div class="wrapper">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary-dark">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -29,11 +29,11 @@ export default (user) => {
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <a href="#" id="mnuChangePwd" class="dropdown-item nav-link">
                                 <i class="fas fa-key" class="menu-icon"></i>
-                                <span class="label" data-i18n="ChangePassword"></span>
+                                <span class="label" data-i18n="changePassword"></span>
                             </a>
                             <a href="#" id="mnuLogout" class="dropdown-item nav-link">
                                 <i class="fas fa-sign-out-alt" class="menu-icon"></i>
-                                <span class="label" data-i18n="Logout"></span>
+                                <span class="label" data-i18n="logout"></span>
                             </a>
                         </div>
                     </li>

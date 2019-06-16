@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "webpack-dev-server --config webpack.dev.js",
+    "dev": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js --verbose"
   },
   "author": "",
@@ -71,6 +70,7 @@
     "daemonite-material": "^4.1.1",
     "es6-promise": "^4.2.6",
     "formdata-polyfill": "^3.0.18",
+    "hyperhtml": "^2.29.0",
     "i18next": "^15.1.2",
     "i18next-browser-languagedetector": "^3.0.1",
     "i18next-xhr-backend": "^2.0.1",

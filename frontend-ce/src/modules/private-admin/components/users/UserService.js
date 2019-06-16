@@ -1,4 +1,6 @@
 import userAuthService from '../../../common/services/UserAuthService'
+import '../../../../services/SubscriberServices'
+
 /**
  * User Service
  * @description Client service in order to call user related APIs
@@ -15,14 +17,18 @@ export default {
         }
       })
       .then(response => Promise.all([response, response.json()]))
-      .then(([response, data]) => {
-        response.ok && (this.data = data);
-        return data;
+      .then(([result, response]) => {
+        result.ok && (this.data = response.data);
+        return response.data;
       })
       .catch(() => false);
     } catch (exc) {
       return Promise.reject(false);
     }
+  },
+
+  getDetails(id) {
+    return this.data.find( e => e.id == id);
   },
 
   getById(id) {
@@ -33,6 +39,8 @@ export default {
     return []
   },
 
-
+  delete(id) {
+    return Promise.resolve(true);
+  }
   
 }

@@ -3,6 +3,8 @@ import routingService from './../../services/RoutingService'
 import privateRoutingService from '../common/services/PrivateRoutingService'
 import userAuthService from '../common/services/UserAuthService'
 
+import '../common/styles/_private.scss';
+
 export default {
 
   init() {
@@ -16,7 +18,6 @@ export default {
   initContent() {
     document.body.className = "private";
     import ('../common/components/list-empty/ListEmpty');
-    import ('../common/components/data-table/DataTable');
     import ('../common/components/home/Home');
     import ('./components/profile-menu/ProfileMenu');
     import ('./components/dashboard/Dashboard');

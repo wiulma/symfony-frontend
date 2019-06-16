@@ -25,8 +25,6 @@ export default {
   emptyMainContainer() {
     const n = document.getElementById(this.ROOT_AREA);
     n.removeChild(n.firstElementChild);
-  },
-
-
+  }
 
 }

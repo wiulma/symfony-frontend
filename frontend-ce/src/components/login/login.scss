@@ -2,7 +2,11 @@ app-login {
   display: flex;
   justify-content: center;
 
-  card {
-    width: 33vw
+  .card {
+    width: 40rem;
+
+    .card-header {
+      color: #fff;
+    }
   }
 }

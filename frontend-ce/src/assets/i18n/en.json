@@ -1,21 +1,39 @@
 {
-    "login": "Login",
-    "Username": "Username",
-    "Password": "Password",
-    "Documents": "Documents",
-    "Users": "Users",
-    "Configurations": "Configurations",
-    "TypeDocs": "Documents Types",
-    "Profile": "Profile",
-    "ChangePassword": "Change Password",
-    "DocTypes": "Document Types",
-    "Logout": "Logout",
-    "UsersList": "Users List",
-    "LoginFailed": "Login Failed",
-    "InvalidCredentials": "Invalid Credentials",
-    "btnCreateUser": "Create User",
-    "Name": "Name",
-    "Surname": "Surname",
-    "Email": "Email",
-    "ListEmpty": "No data found"
+    "navbar": {
+        "documents": "Documents",
+        "users": "Users",
+        "configurations": "Configurations",
+        "profile": "Profile",
+        "changePassword": "Change Password",
+        "docTypes": "Document Types",
+        "logout": "Logout"
+    },
+    "common": {
+        "yes": "Yes",
+        "no": "No",
+        "save": "Save",
+        "cancel": "Cancel",
+        "listEmpty": "No data found",
+        "confirmTitle": "Confirm operation"
+    },
+    "login": {
+        "title": "Login",
+        "login": "Login",
+        "username": "Username",
+        "password": "Password",
+        "loginFailed": "Login Failed",
+        "invalidCredentials": "Invalid Credentials"
+    },
+    "user": {
+        "listTitle": "Users List",
+        "createTitle": "Create new user",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "confirmDeleteUser": "Delete user {{fullname}}?",
+        "confirmDeleteUserSuccess": "User {{fullname}} deleted",
+        "confirmDeleteUserError": "Error deleting user {{fullname}}, {{error}}",
+        "btnCreateUser": "Create User"
+    }
+    
 }

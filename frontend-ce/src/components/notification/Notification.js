@@ -1,7 +1,9 @@
 import domUtils from '../../utils/Dom';
+import Const from '../../const';
+
 import template from './notification.html.js';
 
-import './_notification.scss';
+import './notification.scss';
 
 customElements.define('app-notification', class extends HTMLElement {
 
@@ -9,6 +11,7 @@ customElements.define('app-notification', class extends HTMLElement {
 		super();
 		this.message = '';
 		this.onShow = this.show.bind(this)
+		this.onHideMessage = this.hideMessage.bind(this);
 	}
 
 	connectedCallback() {
@@ -24,15 +27,24 @@ customElements.define('app-notification', class extends HTMLElement {
 		(this.message != '') && this.notifyMessage()
 	}
 
+	hideMessage(){
+		this.firstElementChild.parentNode.removeChild(this.firstElementChild);
+	}
+
 	notifyMessage() {
-		const tmpl = template(this.message);
-        const n = domUtils.htmlToElement(tmpl);
+        const n = domUtils.htmlToElement(template(this.message));
 
-		n.addEventListener('closed.bs.alert', () => {
-			this.firstElementChild.parentNode.removeChild(this.firstElementChild)
-		});
+		n.addEventListener('closed.bs.alert', this.onHideMessage);
 
-		this.appendChild(n);
+		window.requestAnimationFrame(() => {
+			this.appendChild(n);
+			setTimeout(() => {
+				n.removeEventListener('closed.bs.alert', this.onHideMessage);
+				n.parentNode.removeChild(n);	
+			}, Const.NOTIFICATION_SHOW)
+		})
+
+		
 	}
 
 })
