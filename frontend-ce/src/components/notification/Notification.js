@@ -36,13 +36,11 @@ customElements.define('app-notification', class extends HTMLElement {
 
 		n.addEventListener('closed.bs.alert', this.onHideMessage);
 
-		window.requestAnimationFrame(() => {
-			this.appendChild(n);
-			setTimeout(() => {
-				n.removeEventListener('closed.bs.alert', this.onHideMessage);
-				n.parentNode.removeChild(n);	
-			}, Const.NOTIFICATION_SHOW)
-		})
+		this.appendChild(n);
+		setTimeout(() => {
+			n.removeEventListener('closed.bs.alert', this.onHideMessage);
+			n.parentNode.removeChild(n);	
+		}, Const.NOTIFICATION_SHOW)
 
 		
 	}

@@ -27,13 +27,21 @@
     "user": {
         "listTitle": "Users List",
         "createTitle": "Create new user",
+        "detailTitle": "User {{fullname}}",
         "name": "Name",
         "surname": "Surname",
         "email": "Email",
         "confirmDeleteUser": "Delete user {{fullname}}?",
         "confirmDeleteUserSuccess": "User {{fullname}} deleted",
         "confirmDeleteUserError": "Error deleting user {{fullname}}, {{error}}",
-        "btnCreateUser": "Create User"
+        "btnCreateUser": "Create User",
+        "detailSave": "User details",
+        "detailSaveSuccess": "User details saved",
+        "detailSaveError": "User details failed to save",
+        "validation": {
+            "name": "Name can't be empty",
+            "surname": "Surname can't be empty"
+        }
     }
     
 }

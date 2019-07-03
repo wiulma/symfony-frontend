@@ -13,5 +13,11 @@ export default {
         fn(...data)
       });
     }
+  },
+
+  unsubscribe(msg, fn) {
+    this.subs[msg].splice(
+      this.subs[msg].findIndex(elm => elm === fn), 1
+    );
   }
 }

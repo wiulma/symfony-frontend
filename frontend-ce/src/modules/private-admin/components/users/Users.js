@@ -8,7 +8,6 @@ import loaderService from './../../../../components/loader/LoaderService';
 
 import tmplMain from './main.html'
 import tmplListItem from './ListItem.html.js'
-import tmplDetails from './UserDetail.html.js'
 import i18next from 'i18next';
 
 customElements.define('app-users', class extends HTMLElement {
@@ -23,7 +22,8 @@ customElements.define('app-users', class extends HTMLElement {
 			createUser: this.createUser.bind(this),
 			sort: this.sort.bind(this),
 			editUser: this.editUser.bind(this),
-			deleteUser: this.deleteUser.bind(this)
+			deleteUser: this.deleteUser.bind(this),
+			loadData: this.loadData.bind(this, true)
 		};
 	}
 
@@ -31,21 +31,23 @@ customElements.define('app-users', class extends HTMLElement {
 		const n = domUtils.htmlToElement(tmplMain);
 		i18nService.localize(n);
 		this.className = "container";
-		window.requestAnimationFrame(() => {
-			this.appendChild(n);
-			this.loadData();
-			n.querySelector("#btnCreateUser").addEventListener('click', this.listeners.createUser);
-			n.querySelectorAll("th[data-target]").forEach( n => n.addEventListener('click', this.listeners.sort));
-		})
+		this.appendChild(n);
+		this.loadData();
+		n.querySelector("#btnCreateUser").addEventListener('click', this.listeners.createUser);
+		n.querySelectorAll("th[data-target]").forEach( n => n.addEventListener('click', this.listeners.sort));
+		import ('./UserDetail');
+		userService.subscribe(userService.EVENTS.USER_SAVED, this.listeners.loadData);
 	}
 
 	disconnectedCallback() {
 		this.clearListEvents();
 		this.querySelectorAll('th[data-target]').forEach( n => n.removeEventListener('click', this.listeners.sort));
 		this.querySelector("#btnCreateUser").addEventListener('click', this.listeners.createUser);
+		notificationService.unsubscribe(userService.EVENTS.USER_SAVED, this.showMessage);
 	}
 
 	loadData(loading = true) {
+		console.log("loading user lista data...");
 		loading && loaderService.show('list-container');
 		return userService.getList()
 			.then(data => this.renderList(data))
@@ -132,6 +134,8 @@ customElements.define('app-users', class extends HTMLElement {
 		evt.preventDefault();
 		evt.stopPropagation();
 		console.log('edit user '+evt.currentTarget.dataset.id);
+		const detail = domUtils.htmlToElement('<app-user-detail id="'+evt.currentTarget.dataset.id+'"></app-user-detail>');
+		document.body.appendChild(detail);
 	}
 
 });
