@@ -6,7 +6,7 @@ use App\Entity\User;
 
 class UserResponseMapper
 {
-    public function serializeListItem(User $item)
+    public function normalizeListItem(User $item)
     {
         return [
             "id" => $item->getId(),
@@ -15,4 +15,5 @@ class UserResponseMapper
             "email" => $item->getEmail()
         ];        
     }
+
 }

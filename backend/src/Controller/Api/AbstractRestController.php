@@ -38,7 +38,7 @@ class AbstractRestController extends AbstractController
         return $errors;
     }
 
-    protected function filterData($data, $customFilters = [])
+    protected function filterData(Array $data, Array $customFilters = [])
     {
         foreach($data as $key=>$value) {
             $data[$key] = $value ? filter_var($value, $customFilters[$key] ?? FILTER_SANITIZE_STRING) : $value;
@@ -46,17 +46,17 @@ class AbstractRestController extends AbstractController
     }
 
 
-    public function serialize($obj)
+    public function normalize(Object $obj)
     {
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
         $serializer = new Serializer($normalizers, $encoders);
 
-        return $serializer->serialize($obj, 'json', ['skip_null_values' => true]);
+        return $serializer->normalize($obj, 'json', ['skip_null_values' => true]);
     }
 
-    public function serializeList($list, $mapper = NULL)
+    public function normalizeList(Array $list, Object $mapper = NULL)
     {
         $result = [];
         $encoders = [new JsonEncoder()];
@@ -65,10 +65,18 @@ class AbstractRestController extends AbstractController
         $serializer = new Serializer($normalizers, $encoders);
 
         foreach ($list as $item) {
-            $result[] = $mapper ? $mapper->serializeListItem ($item) : $serializer->serialize($item, 'json', ['skip_null_values' => true]);
+            $result[] = $mapper ? $mapper->normalizeListItem ($item) : $serializer->normalize($item, 'json', ['skip_null_values' => true]);
         }
 
         return $result;
+    }
+
+    public function prepareDataListResponse(Array $data, Object $mapper = NULL): ?array {
+        return ["data" => $this->normalizeList($data, $mapper)];
+    }
+
+    public function preparareDataResponse(Object $data): ?array {
+        return ["data" => $this->normalize($data)];
     }
 
 }

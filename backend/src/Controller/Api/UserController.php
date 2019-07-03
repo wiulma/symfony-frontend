@@ -25,7 +25,7 @@ class UserController extends AbstractRestController
     public function getList(Request $request)
     {
         $data = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return new JsonResponse(["data" => $this->serializeList($data, new UserResponseMapper())], Response::HTTP_OK);
+        return new JsonResponse($this->prepareDataListResponse($data, new UserResponseMapper()), Response::HTTP_OK);
     }
 
     /**
@@ -34,10 +34,10 @@ class UserController extends AbstractRestController
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
 
-    public function getDetail($idUser)
+    public function getDetail(int $idUser)
     {
         $data = $this->getDoctrine()->getRepository(User::class)->findOneBy(["id" => $idUser]);
-        return new JsonResponse(["data" => $this->serialize($data)], Response::HTTP_OK);
+        return new JsonResponse($this->preparareDataResponse($data), Response::HTTP_OK);
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends AbstractRestController
             $em->persist($user);
             $em->flush();
 
-            $respData = ["data" => $this->serialize($user)];
+            $respData = ["data" => $this->normalize($user)];
             $respStatus = Response::HTTP_CREATED;
         }
         return new JsonResponse($respData, $respStatus);
