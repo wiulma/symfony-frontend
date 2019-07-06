@@ -85,3 +85,6 @@ https://medium.com/@joeymasip/how-to-create-an-api-with-symfony-4-and-jwt-b2334a
 - react 
 https://www.thinktocode.com/2018/06/21/symfony-4-and-reactjs/
 https://auth0.com/blog/developing-modern-apps-with-symfony-and-react/
+
+TODO:
+https://github.com/zircote/swagger-php

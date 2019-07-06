@@ -47,7 +47,7 @@ class Credential implements UserInterface {
 
     /**
      * @var string
-     * @ORM\Column(name="token", type="string", length=100)
+     * @ORM\Column(name="token", type="string", length=100, nullable=true)
      */
     private $token;
 

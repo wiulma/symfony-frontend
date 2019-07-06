@@ -39,7 +39,7 @@ class JWTToken
             'nbf'  => $notBefore,        // Not before
             'exp'  => $expire,           // Expire
             'data' => [                  // Data related to the signer user
-                'userId' => $auth->getUserId() // userid from the users table
+                'userId' => $auth->getUser()->getId() // userid from the users table
             ]
         ];
 

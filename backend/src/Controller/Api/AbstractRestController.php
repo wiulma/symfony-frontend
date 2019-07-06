@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\Response;
 
 class AbstractRestController extends AbstractController
 {
@@ -77,6 +78,22 @@ class AbstractRestController extends AbstractController
 
     public function preparareDataResponse(Object $data): ?array {
         return ["data" => $this->normalize($data)];
+    }
+
+    /**
+     * 
+     */
+    protected function getResponseErrors($listViolations) {
+        $errors = [];
+
+        foreach ($listViolations as $violations) {
+            foreach ($violations as $violation) {
+                $errors[] = ["attribute" => $violation->getPropertyPath(), "message" => $violation->getMessage()];
+            }
+        }
+        $respData = ["errors" => $errors];
+        $respStatus = Response::HTTP_BAD_REQUEST;
+        return [$respStatus, $respData];
     }
 
 }

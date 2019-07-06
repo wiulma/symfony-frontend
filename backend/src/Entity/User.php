@@ -38,7 +38,8 @@ class User {
 
     /**
      * @var string
-     * @ORM\Column(name="gender", type="enumgender", length=1, nullable=true)
+     * @ORM\Column(name="gender", type="string", length=1, nullable=true)
+     * enumgender
      */
     private $gender;
 
