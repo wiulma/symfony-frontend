@@ -43,7 +43,6 @@ customElements.define('app-users', class extends HTMLElement {
 		this.clearListEvents();
 		this.querySelectorAll('th[data-target]').forEach( n => n.removeEventListener('click', this.listeners.sort));
 		this.querySelector("#btnCreateUser").addEventListener('click', this.listeners.createUser);
-		notificationService.unsubscribe(userService.EVENTS.USER_SAVED, this.showMessage);
 	}
 
 	loadData(loading = true) {
@@ -108,19 +107,27 @@ customElements.define('app-users', class extends HTMLElement {
 				if(result) {
 					loaderService.show('list-container');
 					userService.delete(id)
-						.then(() => {
-							notificationService.show(
-								{
-									title: i18next.t("usersList"), 
-									message: i18next.t("user.confirmDeleteUserSuccess", {fullname: user.name+' '+user.surname})
-								}, notificationService.STYLE.SUCCESS);
-							return this.loadData()
+						.then((result) => {
+							if(result) {
+								notificationService.show(
+									{
+										title: i18next.t("usersList"), 
+										message: i18next.t("user.confirmDeleteUserSuccess", {fullname: user.name+' '+user.surname})
+									}, notificationService.STYLE.SUCCESS);
+								return this.loadData()
+							} else {
+								notificationService.show(
+									{
+										title: i18next.t("usersList"), 
+										message: i18next.t("common.confirmDeleteError")
+									}, notificationService.STYLE.ERROR);
+							}
 						})
 						.catch((error) => {
 							notificationService.show(
 								{
 									title: i18next.t("usersList"), 
-									message: i18next.t("user.confirmDeleteUserError", {fullname: user.name+' '+user.surname})
+									message: i18next.t("common.confirmDeleteError")
 								}, notificationService.STYLE.ERROR);
 						})						
 						.finally( () => loaderService.hide('list-container'));

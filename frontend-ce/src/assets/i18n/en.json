@@ -14,7 +14,11 @@
         "save": "Save",
         "cancel": "Cancel",
         "listEmpty": "No data found",
-        "confirmTitle": "Confirm operation"
+        "confirmTitle": "Confirm operation",
+        "confirmDeleteError": "Error deleting data",
+        "validation": {
+            "value-invalid": "Invalid value"
+        }
     },
     "login": {
         "title": "Login",
@@ -31,17 +35,29 @@
         "name": "Name",
         "surname": "Surname",
         "email": "Email",
+        "gender": "Gender",
         "confirmDeleteUser": "Delete user {{fullname}}?",
         "confirmDeleteUserSuccess": "User {{fullname}} deleted",
-        "confirmDeleteUserError": "Error deleting user {{fullname}}, {{error}}",
         "btnCreateUser": "Create User",
         "detailSave": "User details",
         "detailSaveSuccess": "User details saved",
         "detailSaveError": "User details failed to save",
+        "role": "Role",
+        "repeatPassword": "Repeat Password",
+        "security": "Security",
         "validation": {
-            "name": "Name can't be empty",
-            "surname": "Surname can't be empty"
+            "name-valueMissing": "Name can't be empty",
+            "surname-valueMissing": "Surname can't be empty",
+            "email-valueMissing":"Email can't be empty",
+            "email-typeMismatch":"Invalid Email"
+        },
+        "roles": {
+            "admin": "Admin",
+            "user": "User"
         }
+    },
+    "errors": {
+        "InvalidUserRole": "InvalidUserRole"
     }
     
 }

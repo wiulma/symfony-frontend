@@ -1,3 +1,5 @@
+import i18next from 'i18next'
+
 import domUtils from '../../../../utils/Dom'
 import serviceUtils from '../../../../utils/Service'
 import i18nService from './../../../../services/I18nService'
@@ -41,6 +43,7 @@ customElements.define('app-user-detail', class extends HTMLElement {
 		const n = domUtils.htmlToElement(tmplDetails(user));
 		i18nService.localize(n);
         this.appendChild(n);
+        $('.floating-label .custom-select, .floating-label .form-control').floatinglabel();
         //Trigger the modal
         $("#userDetailModal").modal({
             backdrop: 'static',
@@ -61,7 +64,9 @@ customElements.define('app-user-detail', class extends HTMLElement {
 
     save(evt) {
         const form = this.querySelector('#userDetailForm');
-        form.classList.remove('was-validated');
+        domUtils.cleanFormValidation(form);
+        notificationService.clearResult('userMessageContainer');
+        
         evt.preventDefault();
         evt.stopPropagation();
         
@@ -76,12 +81,15 @@ customElements.define('app-user-detail', class extends HTMLElement {
                             notificationService.STYLE.SUCCESS);
                     })
                     .catch(err => {
-                        notificationService.show(
-                            {title: i18next.t("user.detailSave"), message: i18next.t("user.detailSaveError")},
-                            notificationService.STYLE.ERROR);
+                        notificationService.showResult(
+                            i18next.t('user.detailSaveError') + '-'+err.message,
+                            notificationService.STYLE.ERROR,
+                            'userMessageContainer'
+                        );
                     });
     
         } else {
+            domUtils.showInvalidFormMessage(form);
             form.classList.add('was-validated');
             console.log("Invalifd form");
         }

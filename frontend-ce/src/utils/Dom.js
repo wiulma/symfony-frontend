@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export default {
 
   generateTemplateString(template) {
@@ -26,6 +28,32 @@ export default {
         return data[variable] || ''
       })
     );
+  },
+
+  cleanFormValidation(form) {
+    form.classList.remove('was-validated');
+    form.querySelectorAll('.invalid-feedback')
+      .forEach(function(elm) {
+        elm.innerText = '';
+      });
+  },
+
+  showInvalidFormMessage(form) {
+    var errorElements = document.querySelectorAll(
+      "input.form-control:invalid");
+    errorElements.forEach(function(element) {
+      element.parentNode.childNodes.forEach(function(node) {
+        if (node.className == 'invalid-feedback') {
+          for (let k in element.validity) {
+            if (k && element.validity[k] === true){
+              const n = document.getElementById('validity-'+element.id);
+              if(n) n.innerText = i18next.t([form.dataset.validator+".validation."+element.id+'-'+k, 'common.validation.value-invalid']);
+              break;
+            }
+          }
+        }
+      });
+    });
   }
   
 }

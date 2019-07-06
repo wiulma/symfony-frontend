@@ -21,6 +21,17 @@ module.exports = merge(common, {
         use: [
           'style-loader',
           'css-loader',
+          {
+            loader: "postcss-loader",
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')({
+                  'browsers': ['> 1%', 'last 2 versions']
+                }),
+              ]
+            }
+          },
           'resolve-url-loader',
           {
             loader: 'sass-loader',

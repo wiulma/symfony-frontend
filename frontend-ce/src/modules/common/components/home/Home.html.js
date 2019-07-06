@@ -29,11 +29,11 @@ export default (user) => {
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <a href="#" id="mnuChangePwd" class="dropdown-item nav-link">
                                 <i class="fas fa-key" class="menu-icon"></i>
-                                <span class="label" data-i18n="changePassword"></span>
+                                <span class="label" data-i18n="navbar.changePassword"></span>
                             </a>
                             <a href="#" id="mnuLogout" class="dropdown-item nav-link">
                                 <i class="fas fa-sign-out-alt" class="menu-icon"></i>
-                                <span class="label" data-i18n="logout"></span>
+                                <span class="label" data-i18n="navbar.logout"></span>
                             </a>
                         </div>
                     </li>

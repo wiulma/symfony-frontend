@@ -43,10 +43,7 @@ export default Object.assign({}, SubscriberServices, {
         }
       })
       .then(response => Promise.all([response, response.json()]))
-      .then(([result, response]) => {
-        result.ok && (this.data = response.data);
-        return response.data;
-      })
+      .then(([result, response]) => (result.ok) ? response.data : null)
       .catch(() => false);
     } catch (exc) {
       return Promise.reject(false);
@@ -58,13 +55,42 @@ export default Object.assign({}, SubscriberServices, {
   },
 
   delete(id) {
-    return Promise.resolve(true);
+    try {
+      return fetch(`${API_URL}/api/users/${id}`, {
+          method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${userAuthService.auth.token}`
+          }
+        })
+        .then(response => response.ok)
+        .catch(() => false);
+    } catch (exc) {
+      return Promise.reject(exc);
+    }
   },
 
   save (user) {
-    console.log("saving user", user);
-    this.publish(this.EVENTS.USER_SAVED, user);
-    return Promise.resolve(user);
+    try {
+      return fetch(`${API_URL}/api/users${(user.id !== '') ? '/'+user.id : ''}`, {
+          method: (user.id !== '') ? "PUT" : "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userAuthService.auth.token}`
+          },
+          body: JSON.stringify(user)
+        })
+        .then(response => Promise.all([response, response.json()]))
+        .then(([result, response]) => {
+          if (result.ok) {
+            this.publish(this.EVENTS.USER_SAVED);
+            return response.data;
+          }
+        })
+        .catch(() => false);
+    } catch (exc) {
+      return Promise.reject(exc);
+    }
     
   }
   
