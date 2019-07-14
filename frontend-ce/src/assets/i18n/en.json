@@ -16,7 +16,11 @@
         "listEmpty": "No data found",
         "confirmTitle": "Confirm operation",
         "confirmDeleteError": "Error deleting data",
+        "confirmDeleteSuccess": "Data deleted",
         "changePasswordTitle": "Change Password",
+        "detailSave": "Details data",
+        "detailSaveSuccess": "Details saved",
+        "detailSaveError": "Details failed to save",
         "validation": {
             "value-invalid": "Invalid value"
         }
@@ -56,6 +60,18 @@
             "admin": "Admin",
             "user": "User"
         }
+    },
+    "docs": {
+        "listTitle": "Documents List",
+        "createTitle": "Create new document",
+        "detailTitle": "Document Details",
+        "btnCreateDoc": "Create Document",
+        "type": "Type",
+        "title": "Title",
+        "description": "Description",
+        "insertBy": "Created by",
+        "insertAt": "Created at",
+        "confirmDeleteDoc": "Delete document {{title}}?"
     },
     "security": {
         "securityTitle": "Update Security",

@@ -1,5 +1,5 @@
 import notificationService from "./../../../../components/notification/NotificationService"
-import subscriber from "./../../../../services/SubscriberServices";
+import subscriber from "./../../../../services/SubscriberService";
 
 export default Object.assign({}, subscriber, {
 

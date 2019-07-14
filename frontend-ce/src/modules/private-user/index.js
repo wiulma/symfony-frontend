@@ -31,12 +31,14 @@ export default {
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })
+      /*
       .on('private/documents', () => {
         import ('../common/components/documents/Documents');
         document.getElementById(viewService.CONTENT_AREA).innerHTML = "<app-documents></app-documents>";
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })
+      */
       
   }
 
