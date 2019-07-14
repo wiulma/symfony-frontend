@@ -27,7 +27,7 @@ export default (user) => {
                             <span class="label">${user.name}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a href="#" id="mnuChangePwd" class="dropdown-item nav-link">
+                            <a href="#" id="mnuChangePwd" class="dropdown-item nav-link" data-userid="${user.id}">
                                 <i class="fas fa-key" class="menu-icon"></i>
                                 <span class="label" data-i18n="navbar.changePassword"></span>
                             </a>

@@ -16,6 +16,7 @@
         "listEmpty": "No data found",
         "confirmTitle": "Confirm operation",
         "confirmDeleteError": "Error deleting data",
+        "changePasswordTitle": "Change Password",
         "validation": {
             "value-invalid": "Invalid value"
         }
@@ -56,8 +57,26 @@
             "user": "User"
         }
     },
+    "security": {
+        "securityTitle": "Update Security",
+        "oldPassword": "Old Password",
+        "password": "Password",
+        "repeatPassword": "Repeat Password",
+        "confirmUpdatePassword": "Password changed",
+        "confirmUpdatePasswordFailed": "Failed to change password",
+        "validation": {
+            "oldPassword-valueMissing":"Old password can't be empty",
+            "password-valueMissing":"Password can't be empty",
+            "repeatPassword-valueMissing":"Repeat Password can't be empty",
+            "password-valueCheckFailed":"Password and repeat password must be equals",
+            "repeatPassword-valueCheckFailed":"Password and repeat password must be equals"
+        }
+    },
     "errors": {
-        "InvalidUserRole": "InvalidUserRole"
+        "InvalidUser": "InvalidUser",
+        "InvalidUserRole": "InvalidUserRole",
+        "InvalidUserPassword": "InvalidUserPassword",
+        "InvalidUserOldPassword": "InvalidUserOldPassword"
     }
     
 }

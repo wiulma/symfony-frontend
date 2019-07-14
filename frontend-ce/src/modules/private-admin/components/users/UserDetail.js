@@ -6,7 +6,6 @@ import i18nService from './../../../../services/I18nService'
 
 import tmplDetails from './UserDetail.html.js'
 import userService from './UserService';
-import loaderService from './../../../../components/loader/LoaderService';
 import notificationService from '../../../../components/notification/NotificationService';
 
 customElements.define('app-user-detail', class extends HTMLElement {

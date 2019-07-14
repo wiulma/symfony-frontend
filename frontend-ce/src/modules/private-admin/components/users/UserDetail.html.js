@@ -9,6 +9,13 @@ function getSecurityPanel(user) {
                 <option value="U" data-i18n="user.roles.user" ${user.role === 'U' ? 'selected' : ''}></option>
             </select>
           </div>
+          <div className="form-group">
+          <div class="floating-label">
+            <label for="username" data-i18n="login.username"></label>
+            <input type="text" id="username" name="username" required class="form-control" value="${user.username}"/>
+            <div id="validity-username"></div>
+          </div>
+        </div>
         </div>
     </fieldset>`;
   } else {

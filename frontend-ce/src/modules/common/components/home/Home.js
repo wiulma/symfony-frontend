@@ -25,8 +25,11 @@ customElements.define('app-home', class extends HTMLElement {
         this.appendChild(n);
     }
 
-    changePassword() {
-        alert('change password');
+    changePassword(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        const detail = domUtils.htmlToElement('<app-change-pwd data-userid="'+evt.currentTarget.dataset.userid+'"></app-change-pwd>');
+        document.body.appendChild(detail);
     }
 
     logout() {

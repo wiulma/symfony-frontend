@@ -47,7 +47,12 @@ export default {
           for (let k in element.validity) {
             if (k && element.validity[k] === true){
               const n = document.getElementById('validity-'+element.id);
-              if(n) n.innerText = i18next.t([form.dataset.validator+".validation."+element.id+'-'+k, 'common.validation.value-invalid']);
+              if(n) {
+                const s = (k === 'customError' && n.dataset.customMessage) ? 
+                form.dataset.validator+".validation."+n.dataset.customMessage :
+                  form.dataset.validator+".validation."+element.id+'-'+k;
+                n.innerText = i18next.t([s, 'common.validation.value-invalid']);
+              }
               break;
             }
           }

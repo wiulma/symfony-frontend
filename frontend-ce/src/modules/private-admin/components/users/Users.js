@@ -23,6 +23,7 @@ customElements.define('app-users', class extends HTMLElement {
 			sort: this.sort.bind(this),
 			editUser: this.editUser.bind(this),
 			deleteUser: this.deleteUser.bind(this),
+			changePwdUser: this.changePwdUser.bind(this),
 			loadData: this.loadData.bind(this, true)
 		};
 	}
@@ -62,7 +63,6 @@ customElements.define('app-users', class extends HTMLElement {
 			const df = document.createDocumentFragment();
 			data.forEach( (user) => {
 				const row = domUtils.htmlToElement(tmplListItem(user));
-				row.addEventListener('click', this.listeners.selectUser);
 				df.appendChild(row);
 			})
 			const lc = this.querySelector('#list-container');
@@ -142,6 +142,14 @@ customElements.define('app-users', class extends HTMLElement {
 		evt.stopPropagation();
 		console.log('edit user '+evt.currentTarget.dataset.id);
 		const detail = domUtils.htmlToElement('<app-user-detail id="'+evt.currentTarget.dataset.id+'"></app-user-detail>');
+		document.body.appendChild(detail);
+	}
+
+	changePwdUser(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		console.log('change pwd user '+evt.currentTarget.dataset.id);
+		const detail = domUtils.htmlToElement('<app-change-pwd data-userid="'+evt.currentTarget.dataset.id+'"></app-change-pwd>');
 		document.body.appendChild(detail);
 	}
 
