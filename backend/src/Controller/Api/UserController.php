@@ -221,7 +221,7 @@ class UserController extends AbstractRestController
             $em = $this->getDoctrine()->getManager();
             /** @var \App\Entity\Credential $credential*/
             $credentials = $em->getRepository(Credential::class)->find($idUser);
-            if ($this->passwordChecker->verify($credentials->getPassword(), $data['oldPassword'])) {
+            if ($this->passwordChecker->verify($data['oldPassword'], $credentials->getPassword())) {
                 $credentials->setPassword($this->passwordChecker->hash($data['password']));
                 $em->persist($credentials);
                 $em->flush();
