@@ -17,6 +17,7 @@ class User {
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"default", "profile"})
      */
     private $id;
 

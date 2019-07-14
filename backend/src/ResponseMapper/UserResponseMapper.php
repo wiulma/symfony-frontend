@@ -24,7 +24,8 @@ class UserResponseMapper
             "surname" => $user->getSurname(),
             "email" => $user->getEmail(),
             "gender" => $user->getGender(),
-            "role" => $credential->getRole()
+            "role" => $credential->getRole(),
+            "username" => $credential->getUsername(),
         ];  
     }
 

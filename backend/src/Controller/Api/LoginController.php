@@ -8,16 +8,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Psr\Log\LoggerInterface;
 
 use App\Entity\Credential;
 use App\Security\JWTToken;
 use App\RequestEntity\LoginRequest;
+use App\Security\PasswordChecker;
 
 /**
  * @Route("/login")
  */
 class LoginController extends AbstractRestController
 {
+
+    private $logger;
+    /** @var  \App\Security\PasswordChecker $passwordChecker */
+    private $passwordChecker;
+
+    public function __construct(PasswordChecker $passwordChecker, LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->passwordChecker = $passwordChecker;
+    }
 
     /**
      * @Route("", name="api_post_login",  methods={"POST"})
@@ -26,12 +38,15 @@ class LoginController extends AbstractRestController
      */
     public function doLogin(Request $request, ValidatorInterface $validator)
     {
+        
         $respStatus = Response::HTTP_INTERNAL_SERVER_ERROR;
         $respData = [];
 
         $data = json_decode($request->getContent(), true);
 
         $this->filterData($data);
+
+        $this->logger->warning(str_replace("%uname%", $data['username'], "Logging by %uname%"));
 
         $login = new LoginRequest();
 
@@ -44,14 +59,14 @@ class LoginController extends AbstractRestController
 
             $doctrine = $this->getDoctrine();
 
+            /** @var  \App\Entity\Credential $passwordChecker */
             $auth = $doctrine
                 ->getRepository(Credential::class)
                 ->findOneBy([
-                    "username" => $login->getUsername(),
-                    "password" => $login->getPassword()
+                    "username" => $login->getUsername()
                 ]);
 
-            if (isset($auth)) {
+            if ($auth && $this->passwordChecker->verify($data['password'], $auth->getPassword())) {
                 $em = $doctrine->getManager();
                 $auth->setToken(JWTToken::encode($auth));
                 $em->persist($auth);

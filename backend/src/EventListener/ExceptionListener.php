@@ -1,8 +1,7 @@
 <?php
 namespace App\EventListener;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation as HTTP;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
@@ -10,28 +9,20 @@ class ExceptionListener
 {
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        // You get the exception object from the received event
         $exception = $event->getException();
-        $message = sprintf(
-            'My Error says: %s with code: %s',
-            $exception->getMessage(),
-            $exception->getCode()
-        );
-
-        // Customize your response object to display the exception details
-        $response = new JsonResponse();
-        $response->setContent($message);
-
-        // HttpExceptionInterface is a special type of exception that
-        // holds status code and header details
+        $response  = new HTTP\JsonResponse();
         if ($exception instanceof HttpExceptionInterface) {
-            $response->setStatusCode($exception->getStatusCode());
+            $code = $exception->getStatusCode();
             $response->headers->replace($exception->getHeaders());
         } else {
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $code = HTTP\Response::HTTP_INTERNAL_SERVER_ERROR;
         }
-
-        // sends the modified response object to the event
+        $data = [
+            'message' => $exception->getMessage(),
+//            'trace'   => $exception->getTrace(),
+        ];
+        $response->setStatusCode($code);
+        $response->setData($data);
         $event->setResponse($response);
     }
 }
