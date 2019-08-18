@@ -55,7 +55,8 @@ services:
       - APP_ENV=docker
     volumes:
       - .:/application
-      - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+      - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+      - ./docker/php-fpm/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
     networks:
       - sample-net
 

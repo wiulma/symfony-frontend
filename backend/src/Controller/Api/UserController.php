@@ -12,7 +12,6 @@ use App\Security\PasswordChecker;
 use App\Entity\User;
 use App\ResponseMapper\UserResponseMapper;
 use App\Entity\Credential;
-use Hoa\Regex\Exception;
 
 /**
  * @Route("/users")
@@ -32,7 +31,7 @@ class UserController extends AbstractRestController
      * @param Request $request
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getList(Request $request)
+    public function getList(Request $request): JsonResponse
     {
         $data = $this->getDoctrine()->getRepository(User::class)->findAll();
         return new JsonResponse($this->prepareDataListResponse($data, new UserResponseMapper()), Response::HTTP_OK);
@@ -44,7 +43,7 @@ class UserController extends AbstractRestController
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
 
-    public function getDetail(int $idUser)
+    public function getDetail(int $idUser): JsonResponse
     {
         $em = $this->getDoctrine();
 
@@ -60,12 +59,15 @@ class UserController extends AbstractRestController
         
     }
 
+
+
     /**
      * @Route("", name="api_post_users",  methods={"POST"})
      * @param Request $request
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function createUser(Request $request, ValidatorInterface $validator)
+
+    public function createUser(Request $request, ValidatorInterface $validator): JsonResponse
     {
         $respStatus = Response::HTTP_INTERNAL_SERVER_ERROR;
         $respData = [];
@@ -108,11 +110,11 @@ class UserController extends AbstractRestController
                     $respStatus = Response::HTTP_CREATED;
                 }
                 $em->close();
-            }  catch(Exception $e){
+            }  catch(\Exception $e){
                 if( $em && $em->isOpen()) {
                     $em->close();
                 }
-                $respData = ["errors" => [$e->getMessage()]];
+                $respData = ["error" => $e->getMessage()];
                 $respStatus = Response::HTTP_BAD_REQUEST;
             }
         }
@@ -125,7 +127,7 @@ class UserController extends AbstractRestController
      * @param Integer idUser
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function updateUser(Request $request, int $idUser, ValidatorInterface $validator)
+    public function updateUser(Request $request, int $idUser, ValidatorInterface $validator): JsonResponse
     {
         $respStatus = Response::HTTP_INTERNAL_SERVER_ERROR;
         $respData = [];
@@ -145,7 +147,7 @@ class UserController extends AbstractRestController
         $violations = $validator->validate($user);
 
         if (count($violations) > 0) {
-            list($respStatus, $respData) = $this->getResponseErrors([$violations]);
+            list($respStatus, $respData) = $this->getResponseErrors($violations);
         } else {
             try {
                 $em = $this->getDoctrine()->getManager();
@@ -171,8 +173,11 @@ class UserController extends AbstractRestController
                 }
                 $em->close();
                 $respStatus = Response::HTTP_OK;
-            } catch(Exception $e){
-                $respData = ["errors" => [$e->getMessage()]];
+            } catch(\Exception $e){
+                if( $em && $em->isOpen()) {
+                    $em->close();
+                }
+                $respData = ["error" => $e->getMessage()];
                 $respStatus = Response::HTTP_BAD_REQUEST;
             } 
 
@@ -187,7 +192,7 @@ class UserController extends AbstractRestController
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
 
-    public function deleteUser(int $idUser)
+    public function deleteUser(int $idUser): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($idUser);
@@ -206,7 +211,7 @@ class UserController extends AbstractRestController
      * @param Integer idUser
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function updateUserPassword(Request $request, int $idUser, ValidatorInterface $validator)
+    public function updateUserPassword(Request $request, int $idUser, ValidatorInterface $validator): JsonResponse
     {
         // try {
             $data = json_decode(

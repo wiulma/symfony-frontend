@@ -1,0 +1,16 @@
+1. docker-compose up
+2. open a browser:
+http://localhost:8001 -> mysql
+service: mysqluser: root
+pwd: docker_root
+
+http://localhost:8000/ -> backend home page
+
+3. from postman
+    3.1 login
+    3.2 get profile
+    3.3. users list
+
+QUESTIONS:
+1. configurazione monolog
+2. user create with forms

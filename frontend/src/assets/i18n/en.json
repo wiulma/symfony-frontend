@@ -1,0 +1,101 @@
+{
+    "navbar": {
+        "documents": "Documents",
+        "users": "Users",
+        "configurations": "Configurations",
+        "profile": "Profile",
+        "changePassword": "Change Password",
+        "docTypes": "Document Types",
+        "logout": "Logout"
+    },
+    "common": {
+        "yes": "Yes",
+        "no": "No",
+        "save": "Save",
+        "cancel": "Cancel",
+        "listEmpty": "No data found",
+        "confirmTitle": "Confirm operation",
+        "confirmDeleteError": "Error deleting data",
+        "confirmDeleteSuccess": "Data deleted",
+        "changePasswordTitle": "Change Password",
+        "detailSave": "Details data",
+        "detailSaveSuccess": "Details saved",
+        "detailSaveError": "Details failed to save",
+        "validation": {
+            "value-invalid": "Invalid value"
+        }
+    },
+    "login": {
+        "title": "Login",
+        "login": "Login",
+        "username": "Username",
+        "password": "Password",
+        "loginFailed": "Login Failed",
+        "invalidCredentials": "Invalid Credentials"
+    },
+    "user": {
+        "listTitle": "Users List",
+        "createTitle": "Create new user",
+        "detailTitle": "User {{fullname}}",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "gender": "Gender",
+        "confirmDeleteUser": "Delete user {{fullname}}?",
+        "confirmDeleteUserSuccess": "User {{fullname}} deleted",
+        "btnCreateUser": "Create User",
+        "detailSave": "User details",
+        "detailSaveSuccess": "User details saved",
+        "detailSaveError": "User details failed to save",
+        "role": "Role",
+        "repeatPassword": "Repeat Password",
+        "security": "Security",
+        "validation": {
+            "name-valueMissing": "Name can't be empty",
+            "surname-valueMissing": "Surname can't be empty",
+            "email-valueMissing":"Email can't be empty",
+            "email-typeMismatch":"Invalid Email"
+        },
+        "roles": {
+            "admin": "Admin",
+            "user": "User"
+        }
+    },
+    "docs": {
+        "listTitle": "Documents List",
+        "createTitle": "Create new document",
+        "detailTitle": "Document Details",
+        "btnCreateDoc": "Create Document",
+        "detailSave": "Document details",
+        "type": "Type",
+        "title": "Title",
+        "description": "Description",
+        "file": "Document",
+        "path": "Document Path",
+        "insertBy": "Created by",
+        "insertAt": "Created at",
+        "confirmDeleteDoc": "Delete document {{title}}?"
+    },
+    "security": {
+        "securityTitle": "Update Security",
+        "oldPassword": "Old Password",
+        "password": "Password",
+        "repeatPassword": "Repeat Password",
+        "confirmUpdatePassword": "Password changed",
+        "confirmUpdatePasswordFailed": "Failed to change password",
+        "validation": {
+            "oldPassword-valueMissing":"Old password can't be empty",
+            "password-valueMissing":"Password can't be empty",
+            "repeatPassword-valueMissing":"Repeat Password can't be empty",
+            "password-valueCheckFailed":"Password and repeat password must be equals",
+            "repeatPassword-valueCheckFailed":"Password and repeat password must be equals"
+        }
+    },
+    "errors": {
+        "InvalidUser": "InvalidUser",
+        "InvalidUserRole": "InvalidUserRole",
+        "InvalidUserPassword": "InvalidUserPassword",
+        "InvalidUserOldPassword": "InvalidUserOldPassword"
+    }
+    
+}

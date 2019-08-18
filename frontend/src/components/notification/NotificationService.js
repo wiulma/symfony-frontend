@@ -1,64 +1,31 @@
-
-import {NotificationMessageType} from '../../utils/Constants';
-
-
-import { Subject } from 'rxjs';
-
-const subject = new Subject();
-
 export default {
 
-    error: message => subject.next({ type: NotificationMessageType.ERROR, ...message }),
+  STYLE: {
+    SUCCESS: 'success',
+    ERROR: 'danger'
+  },
 
-    success: message => subject.next({ type: NotificationMessageType.SUCCESS, ...message }),
+  show(message, style = "danger") {
+    const evt = new CustomEvent("showNotification", {detail: {...message, style}})
+    document.dispatchEvent(evt);
+  },
 
-    info: message => subject.next({ type: NotificationMessageType.INFO, ...message }),
+  showResult(message, style, container = null) {
+    if (container) {
+      const c = document.getElementById(container);
+      if (c) {
+        const p = document.createElement('p');
+        p.classList.add('message', style);
+        p.innerText = message;
+        c.appendChild(p);
+      }      
+    } else {
+      this.show(message, style);
+    } 
+  },
 
-    clearMessages: () => subject.next(),
-    getMessage: () => subject.asObservable()
-};
-
-/*
-
-class NotificationService {
-
-  static instance;
- 
-  static getInstance() {
-      if (!NotificationService.instance) {
-        NotificationService.instance = new NotificationService();
-      }
-      return NotificationService.instance;
+  clearResult(container) {
+    const c = document.getElementById(container);
+    if (c) c.innerText = '';
   }
-
-  error(m) {
-
-    this.publish("NotifyAlert", {
-      type: NotificationMessageType.ERROR,
-      ...m
-    });
-  }
-
-  success(m) {
-
-    this.publish("NotifyAlert", {
-      type: NotificationMessageType.SUCCESS,
-      ...m
-    });
-  }
-
-  info(m) {
-
-    this.publish("NotifyAlert", {
-      type: NotificationMessageType.INFO,
-      ...m
-    });
-  }
-
 }
-
-const instance = new NotificationService();
-Object.freeze(instance);
-
-export default instance;
-*/

@@ -22,6 +22,7 @@ class LoginController extends AbstractRestController
 {
 
     private $logger;
+
     /** @var  \App\Security\PasswordChecker $passwordChecker */
     private $passwordChecker;
 
@@ -36,7 +37,7 @@ class LoginController extends AbstractRestController
      * @param Request $request
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function doLogin(Request $request, ValidatorInterface $validator)
+    public function doLogin(Request $request, ValidatorInterface $validator) : JsonResponse
     {
         
         $respStatus = Response::HTTP_INTERNAL_SERVER_ERROR;
@@ -57,6 +58,7 @@ class LoginController extends AbstractRestController
 
         if (count($violations) == 0) {
 
+            /** @var Doctrine\Common\Persistence\ManageRegistry $doctrine */
             $doctrine = $this->getDoctrine();
 
             /** @var  \App\Entity\Credential $passwordChecker */

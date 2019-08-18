@@ -1,0 +1,6 @@
+enable logs in 
+
+/etc/php/7.2/fpm/pool.d/www.conf
+
+in container:
+chown www-data.www-data /var/log/fpm-php.www.log
