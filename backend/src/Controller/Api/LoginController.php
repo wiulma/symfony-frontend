@@ -61,7 +61,7 @@ class LoginController extends AbstractRestController
             /** @var Doctrine\Common\Persistence\ManageRegistry $doctrine */
             $doctrine = $this->getDoctrine();
 
-            /** @var  \App\Entity\Credential $passwordChecker */
+            /** @var  \App\Entity\Credential $auth */
             $auth = $doctrine
                 ->getRepository(Credential::class)
                 ->findOneBy([
