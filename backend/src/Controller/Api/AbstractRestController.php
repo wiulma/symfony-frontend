@@ -120,7 +120,7 @@ class AbstractRestController extends AbstractController
         $respStatus = Response::HTTP_INTERNAL_SERVER_ERROR;
         $respData = [];
 
-        $form = $this->buildForm($clazz, $entity, $request->request->all());
+        $form = $this->buildForm($clazz, $entity, json_decode($request->getContent(), true));
 
         if ($form->isValid()) {
             $item = $form->getData();
@@ -157,7 +157,7 @@ class AbstractRestController extends AbstractController
         $respData = [];
         $em = $this->getDoctrine()->getManager();
         $item = $em->getRepository($clazz)->find($id);
-        if (!item) {
+        if (!$item) {
             $respData = ["error" => "DataNotFound"];
             $respStatus = Response::HTTP_BAD_REQUEST;
         } else {
@@ -169,4 +169,3 @@ class AbstractRestController extends AbstractController
         return new JsonResponse($respData, $respStatus);
     }
 }
-
