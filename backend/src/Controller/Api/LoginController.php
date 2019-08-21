@@ -47,7 +47,7 @@ class LoginController extends AbstractRestController
 
         $this->filterData($data);
 
-        $this->logger->warning(str_replace("%uname%", $data['username'], "Logging by %uname%"));
+        $this->logger->warning(str_replace("%uname%", $data['username'], "Logging in %uname%"));
 
         $login = new LoginRequest();
 

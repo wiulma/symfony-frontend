@@ -52,7 +52,7 @@ services:
     container_name: ${PROJECT_NAME}-php-fpm
     working_dir: /application
     environment:
-      - APP_ENV=docker
+      - APP_ENV=dev
     volumes:
       - .:/application
       - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
