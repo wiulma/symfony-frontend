@@ -8,10 +8,10 @@ import '../common/styles/_private.scss';
 export default {
 
   init() {
-    return userAuthService.checkAuth()
+    return userAuthService.getProfile()
       .then(() => {
-        this.initContent();
         this.initRoutes();
+        this.initContent();
       })
   },
 

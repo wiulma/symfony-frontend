@@ -37,6 +37,12 @@ export default {
       }, {
         before: privateRoutingService.authGuard.bind(privateRoutingService)
       })
+      .on('private/articles', () => {
+        import ('./components/articles/Article');
+        document.getElementById(viewService.CONTENT_AREA).innerHTML = "<app-articles></app-articles>";
+      }, {
+        before: privateRoutingService.authGuard.bind(privateRoutingService)
+      })
   }
 
 }

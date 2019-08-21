@@ -5,7 +5,7 @@
         "configurations": "Configurations",
         "profile": "Profile",
         "changePassword": "Change Password",
-        "docTypes": "Document Types",
+        "articles": "Articles",
         "logout": "Logout"
     },
     "common": {
@@ -21,6 +21,7 @@
         "detailSave": "Details data",
         "detailSaveSuccess": "Details saved",
         "detailSaveError": "Details failed to save",
+        "btnCreate": "Create",
         "validation": {
             "value-invalid": "Invalid value"
         }
@@ -61,20 +62,16 @@
             "user": "User"
         }
     },
-    "docs": {
-        "listTitle": "Documents List",
-        "createTitle": "Create new document",
-        "detailTitle": "Document Details",
-        "btnCreateDoc": "Create Document",
-        "detailSave": "Document details",
-        "type": "Type",
+    "articles": {
+        "listTitle": "Articles List",
+        "createTitle": "Create new article",
+        "detailTitle": "Article Details",
+        "btnCreateDoc": "Create Article",
+        "detailSave": "Article details",
+        "id": "Number",
         "title": "Title",
-        "description": "Description",
-        "file": "Document",
-        "path": "Document Path",
-        "insertBy": "Created by",
-        "insertAt": "Created at",
-        "confirmDeleteDoc": "Delete document {{title}}?"
+        "content": "Content",
+        "confirmDeleteDoc": "Delete article {{title}}?"
     },
     "security": {
         "securityTitle": "Update Security",
