@@ -1,7 +1,6 @@
-# php-react
-Symfony backend API
+# Symfony 4 backend API
 
-### First boot with docker (recommended)
+## First boot with docker (recommended)
 1. in host console, execute:
 ```
 docker-compose up
@@ -37,7 +36,7 @@ execute SQL script in
 db/2-data.sql
 ```
 
-### First boot in local environment
+## First boot in local environment
 1. install php 7
 2. install mysql and a mysql client
 3. run
